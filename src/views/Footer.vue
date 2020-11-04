@@ -135,13 +135,14 @@ export default {
       this.routerPush(target);
     },
     routerPush(target) {
-      let name = "";
+      let name = "Home";
       switch (target) {
         case "home": {
           name = "Home";
           break;
         }
         case "promo": {
+          name = "Promo";
           break;
         }
         case "diamond": {

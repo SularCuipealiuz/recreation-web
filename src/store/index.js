@@ -14,8 +14,6 @@ export default new Vuex.Store({
       vip: "",
       uid: ""
     },
-    loginDialog: false,
-    signupDialog: false,
     registerFields: [],
     verificationPattern: 0,
     mcPageTitle: ""
@@ -23,12 +21,6 @@ export default new Vuex.Store({
   mutations: {
     SET_ACTIVE_PAGE(state, string) {
       state.activePage = string;
-    },
-    SET_LOGIN_DIALOG(state, boolean) {
-      state.loginDialog = boolean;
-    },
-    SET_SIGNUP_DIALOG(state, boolean) {
-      state.signupDialog = boolean;
     },
     SET_SITE_REGISTER_FIELDS(state, payload) {
       state.registerFields = payload;
@@ -44,23 +36,14 @@ export default new Vuex.Store({
     },
     SET_MC_PAGE_TITLE(state, title) {
       state.mcPageTitle = title;
+    },
+    SET_REDIRECT_OBJ(state, payload) {
+      state.redirectObj = payload;
     }
   },
   actions: {
     changeActivePage({ commit }, string) {
       commit("SET_ACTIVE_PAGE", string);
-    },
-    openLoginDialog({ commit }) {
-      commit("SET_LOGIN_DIALOG", true);
-      commit("SET_SIGNUP_DIALOG", false);
-    },
-    openSignupDialog({ commit }) {
-      commit("SET_LOGIN_DIALOG", false);
-      commit("SET_SIGNUP_DIALOG", true);
-    },
-    closeDialog({ commit }) {
-      commit("SET_LOGIN_DIALOG", false);
-      commit("SET_SIGNUP_DIALOG", false);
     },
     setSiteRegisterFields({ commit }, payload) {
       commit("SET_SITE_REGISTER_FIELDS", payload);

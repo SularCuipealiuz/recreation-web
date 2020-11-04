@@ -55,8 +55,11 @@ export default {
     }
 
     registerConfig().then(res => {
-      _this.$store.dispatch("setSiteRegisterFields", res.siteRegistFields);
-      _this.$store.dispatch("setVerificationPattern", res.verificationPattern);
+      _this.$store.dispatch("setSiteRegisterFields", res["siteRegistFields"]);
+      _this.$store.dispatch(
+        "setVerificationPattern",
+        res["verificationPattern"]
+      );
     });
   },
   computed: {

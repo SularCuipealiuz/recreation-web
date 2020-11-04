@@ -17,21 +17,29 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Header",
-  computed:{
+  computed: {
     ...mapGetters({
       isLogin: "getIsLogin"
     })
   },
   methods: {
     doOpenSignupDialog() {
-      this.$store.dispatch("openSignupDialog");
+      // this.$store.dispatch("openSignupDialog");
+      this.$router.push({
+        path: "/SignUp",
+        query: { redirect: "/", goBack: "/" }
+      });
     },
     doOpenLoginDialog() {
-      this.$store.dispatch("openLoginDialog");
+      // this.$store.dispatch("openLoginDialog");
+      this.$router.push({
+        path: "/SignIn",
+        query: { redirect: "/", goBack: "/" }
+      });
     }
   }
 };

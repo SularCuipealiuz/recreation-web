@@ -247,6 +247,7 @@ export default {
   name: "SignUp",
   data() {
     return {
+      rotate: false,
       captchaImg: "",
       max: 11,
       min: 6,
@@ -302,10 +303,15 @@ export default {
   },
   methods: {
     doCloseDialog() {
-      this.$store.dispatch("closeDialog");
+      const path =
+        this.$route.query.goBack !== undefined ? this.$route.query.goBack : "";
+      this.$router.push(path);
     },
     doOpenLoginDialog() {
-      this.$store.dispatch("openLoginDialog");
+      this.$router.push({
+        path: "/SignIn",
+        query: { redirect: "/", goBack: "/" }
+      });
     },
     validate() {
       const _this = this;
@@ -402,7 +408,6 @@ export default {
 }
 
 .hint {
-  color: red;
   position: absolute;
   right: 30px;
   top: -12px;

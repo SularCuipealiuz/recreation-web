@@ -171,17 +171,26 @@ export default {
   },
   methods: {
     doCloseDialog() {
-      this.$store.dispatch("closeDialog");
+      const path =
+        this.$route.query.goBack !== undefined ? this.$route.query.goBack : "";
+      this.$router.push(path);
     },
     doOpenSignupDialog() {
-      this.$store.dispatch("openSignupDialog");
+      this.$router.push({
+        path: "/SignUp",
+        query: { redirect: "/", goBack: "/" }
+      });
     },
     validate() {
       const _this = this;
       if (this.$refs.form.validate()) {
         login(_this.form).then(res => {
           _this.$store.dispatch("setUserToken", res["token"]);
-          _this.$store.dispatch("closeDialog");
+          const path =
+            _this.$route.query.redirect !== undefined
+              ? _this.$route.query.redirect
+              : "";
+          _this.$router.push(path);
         });
       }
     },
@@ -270,7 +279,6 @@ export default {
 }
 
 .hint {
-  color: red;
   position: absolute;
   right: 30px;
   top: -12px;
