@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="122" height="36">
+    <defs>
+        <linearGradient id="hqwoilkz4a" x1="0%" x2="100%" y1="0%" y2="0%">
+            <stop offset="0%" stop-color="#E7DDD9"/>
+            <stop offset="98%" stop-color="#DBB6A1"/>
+        </linearGradient>
+        <linearGradient id="mujwd1n8ab" x1="0%" x2="100%" y1="0%" y2="0%">
+            <stop offset="0%" stop-color="#FFF"/>
+            <stop offset="100%" stop-color="#FFF"/>
+        </linearGradient>
+    </defs>
+    <path fill="url(#hqwoilkz4a)" fill-rule="evenodd" d="M18 0h94c5.523 0 10 4.477 10 10v16c0 5.523-4.477 10-10 10H18C8.059 36 0 27.941 0 18S8.059 0 18 0z"/>
+    <text x="51" y="26.022" fill="#FFF" font-family="MFMingHei_Noncommercial" font-size="24">
+        公告
+    </text>
+    <path fill="url(#mujwd1n8ab)" fill-rule="evenodd" d="M37.584 11.72c-.522 2.485-1.87 4.266-3.466 4.266-2.047 0-3.706-2.914-3.706-6.507 0-1.74.395-3.312 1.028-4.479-.331.281-8.44 7.228-8.44 15.628C23 25.251 27.03 29 32.001 29 36.97 29 41 25.251 41 20.628c0-3.111-1.561-6.254-3.416-8.908zm-5.658 15.279c-5.784 0-4.578-10.012-4.578-10.012.079.916 1.428 4.449 4.778 4.449 1.407 0 3.27.312 3.581 2.224.156.961-.749 3.339-3.781 3.339z"/>
+</svg>

@@ -1,6 +1,5 @@
-const VuetifyLoaderPlugin = require("vuetify-loader/lib/plugin");
-
 module.exports = {
+  transpileDependencies: ["vuetify"],
   chainWebpack: config => {
     config.module
       .rule("vue")
@@ -15,25 +14,12 @@ module.exports = {
         rem: 16
       });
   },
-  configureWebpack: {
-    plugins: [
-      new VuetifyLoaderPlugin({
-        match(originalTag, { kebabTag, camelTag, path, component }) {
-          if (kebabTag.startsWith("base-")) {
-            return [
-              camelTag,
-              `import ${camelTag} from '@/components/${camelTag}.vue'`
-            ];
-          }
-        }
-      })
-    ]
-  },
   css: {
     loaderOptions: {
       scss: {
         prependData: `
           @import "src/sass/_mixin.scss";
+          @import "src/sass/_reset.scss";
         `
       }
     }

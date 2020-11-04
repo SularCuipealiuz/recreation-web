@@ -1,4 +1,75 @@
 {
   "sign-up": "Sign Up",
-  "sign-in": "Sign In"
+  "sign-in": "Sign In",
+  "button": {
+    "card": "Card",
+    "deposit": "Deposit",
+    "transfer": "Transfer",
+    "alreadyHaveAnAccount": "Already have an account? Sign in.",
+    "askMC": "",
+    "registered": "Sign Up",
+    "forgetPassword": "Forget Password?",
+    "submit": "Submit"
+  },
+  "footer-tab": {
+    "home": "Home",
+    "promo": "Promo",
+    "mc": "MC",
+    "profile": "Profile",
+    "diamond": "Diamond"
+  },
+  "tip": {
+    "plzLogin": "",
+    "plzLoginSub": "",
+    "account": "",
+    "oriPassword": "",
+    "password": "",
+    "confirm": "",
+    "captcha": "",
+    "userCheck": "",
+    "saveCookies": "",
+    "ruleList": "",
+    "required": "*",
+    "qq": "",
+    "wechat": "",
+    "email": "",
+    "mobile": "",
+    "mobile-captcha": "",
+    "withdrawalNewPassword": "",
+    "withdrawalConfirmPassword": ""
+  },
+  "rules": {
+    "minmax": "",
+    "passwordConfirm": "",
+    "required": "",
+    "captcha": "",
+    "qq": "",
+    "qqRule": "",
+    "wechat": "",
+    "wechatRule": "",
+    "email": "",
+    "emailRule": "",
+    "phoneRule": "",
+    "phoneCaptcha": "",
+    "checkbox": "请确认成年并同意平台条款"
+  },
+  "memberCenter": {
+    "bankCard": "",
+    "passwordManage": "",
+    "bettingHistory": "",
+    "transactionHistory": "",
+    "promoHistory": "",
+    "bonus": "",
+    "massageCenter": "",
+    "helpCenter": "",
+    "wallet": ""
+  },
+  "passwordManage": {
+    "signInPassword": "",
+    "withdrawalPassword": "",
+    "oriPassword": "",
+    "newPassword": "",
+    "confirmPassword": "",
+    "withdrawalNewPassword": ""
+  }
 }

@@ -3,11 +3,10 @@
   src: url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.eot");
   src: url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.woff") format("woff"), url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.svg#DIN Condensed Web") format("svg");
 }
-
 $gradient1: linear-gradient(to bottom, #dccab8 0%, #d2b496 50%, #d2b496 100%);
 $gradient2: linear-gradient(to bottom, #6d7fa1 0%, #a6b1c8 100%);
 $gradient3: linear-gradient(to top, #ed9aa7 0%, #dc6979 100%);
-$gradient4: linear-gradient(to bottom, #eab392 0%, #d98367 100%);
+$gradient4: linear-gradient(to left, #eaddd6 0%, #d98367 100%);
 $gradient5: linear-gradient(to bottom, #f8c244 0%, #e29c46 100%);
 $shadow1: rgba(0, 0, 0, 0.85);
 $shadow2: rgba(0, 0, 0, 0.5);
@@ -25,6 +24,7 @@ $alert-warning: #F4A769;
 $alert-danger: #0FCF51;
 $btn-color1: #c09267;
 $btn-color2: #d2b79c;
+$btn-color3: #ac9278;
 $badge1: #f56c6b;
 $badge2: #db6372;
 $badge3: #6AAAF5;
@@ -32,4 +32,8 @@ $badge4: #FFDC90;
 
 @mixin FontFamilyDINPro {
   font-family: "DIN Condensed Web";
+}
+
+.justify-space-evenly {
+  justify-content: space-evenly !important;
 }

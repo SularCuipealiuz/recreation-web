@@ -23,7 +23,7 @@ export default {
     return {
       windowWidth: window.innerWidth,
       colors: ["indigo", "warning", "pink darken-2", "red lighten-1"],
-      slides: [1,2,3,4,5]
+      slides: [1, 2, 3, 4, 5]
     };
   },
   mounted() {
@@ -46,5 +46,24 @@ export default {
 
 .image {
   width: 100%;
+}
+</style>
+<style>
+.carousel-height .v-btn.v-btn--active .v-btn__content .v-icon {
+  color: #ac9278;
+  opacity: 1;
+}
+
+.carousel-height .v-btn .v-btn__content .v-icon {
+  color: #ac9278;
+  opacity: 0.2;
+}
+
+.v-btn:before {
+  background-color: transparent !important;
+}
+
+.v-carousel__controls {
+  z-index: 0 !important;
 }
 </style>

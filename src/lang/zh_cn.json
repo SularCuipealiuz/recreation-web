@@ -1,4 +1,75 @@
 {
   "sign-up": "注册",
-  "sign-in": "登录"
+  "sign-in": "登录",
+  "button": {
+    "card": "取款",
+    "deposit": "存款",
+    "transfer": "转账",
+    "alreadyHaveAnAccount": "已有账号，立即登录",
+    "askMC": "如有需要请联系客服",
+    "registered": "注册新用户",
+    "forgetPassword": "忘记密码?",
+    "submit": "提交"
+  },
+  "footer-tab": {
+    "home": "首页",
+    "promo": "优惠",
+    "mc": "客服",
+    "profile": "个人中心",
+    "diamond": "推广赚钱"
+  },
+  "tip": {
+    "plzLogin": "请登录",
+    "plzLoginSub": "请先登录/注册后查看",
+    "account": "账号请输入6-11位英数混合",
+    "oriPassword": "請輸入原密碼",
+    "password": "密码请输入6-11位英数混合",
+    "confirm": "请再次输入密码",
+    "captcha": "请输入验证码",
+    "userCheck": "确认已年满18岁，并已阅读和同意本平台的",
+    "saveCookies": "记住账密",
+    "ruleList": "博彩条款",
+    "required": "*为必填栏位",
+    "qq": "请输入QQ号",
+    "wechat": "请输入微信号",
+    "email": "请输入邮箱",
+    "mobile": "请输入11位手机号码",
+    "mobile-captcha": "请输入手机验证码",
+    "withdrawalNewPassword": "请输入6位数字",
+    "withdrawalConfirmPassword": "请再次输入6位数字提款密码"
+  },
+  "rules": {
+    "minmax": "字数应介于6至11之间",
+    "passwordConfirm": "两次密码输入不一致",
+    "required": "该栏位为必填",
+    "captcha": "验证码输入错误",
+    "qqUnique": "该QQ号已存在",
+    "qqRule": "请输入5-11位的QQ号码",
+    "wechatUnique": "该微信号已存在",
+    "wechatRule": "请输入6-20位的微信号",
+    "emailUnique": "该邮箱已存在",
+    "emailRule": "请输入含@正确格式邮箱",
+    "phoneRule": "请输入11位手机号码",
+    "phoneCaptcha": "该手机号已存在",
+    "checkbox": "请确认成年并同意平台条款"
+  },
+  "memberCenter": {
+    "bankCard": "银行卡管理",
+    "passwordManage": "密码管理",
+    "bettingHistory": "投注记录",
+    "transactionHistory": "交易记录",
+    "promoHistory": "优惠记录",
+    "bonus": "返水奖励",
+    "massageCenter": "消息中心",
+    "helpCenter": "帮助中心",
+    "wallet": "余额宝"
+  },
+  "passwordManage": {
+    "signInPassword": "登录密码",
+    "withdrawalPassword": "提款密码",
+    "oriPassword": "原密码",
+    "newPassword": "新密码",
+    "confirmPassword": "确认密码",
+    "withdrawalNewPassword": "请输入密码"
+  }
 }

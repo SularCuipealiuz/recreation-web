@@ -3,6 +3,8 @@
     <router-view name="head" />
     <router-view class="fill-height" name="body" />
     <router-view class="fix-foot" name="foot" />
+    <sign-up v-if="signupDialogState"></sign-up>
+    <login v-if="loginDialogState"></login>
   </v-app>
 </template>
 
@@ -25,3 +27,43 @@ html {
   }
 }
 </style>
+<script>
+import SignUp from "@/views/SignUp";
+import Login from "@/views/Login";
+import { mapGetters } from "vuex";
+import { registerConfig, verify } from "@/api/account";
+import { getToken } from "@/plugins/auth";
+
+export default {
+  components: { SignUp, Login },
+  data() {
+    return {};
+  },
+  mounted() {
+    const _this = this;
+    let token = getToken();
+    console.log("token", token);
+
+    if (token !== null && token !== undefined) {
+      verify({
+        token: "Bearer " + token
+      }).then(res => {
+        _this.$store.dispatch("setUserUid", res["userId"]);
+      });
+
+      this.$store.dispatch("setUserToken", token);
+    }
+
+    registerConfig().then(res => {
+      _this.$store.dispatch("setSiteRegisterFields", res.siteRegistFields);
+      _this.$store.dispatch("setVerificationPattern", res.verificationPattern);
+    });
+  },
+  computed: {
+    ...mapGetters({
+      loginDialogState: "getLoginDialog",
+      signupDialogState: "getSignupDialog"
+    })
+  }
+};
+</script>

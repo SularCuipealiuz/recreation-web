@@ -1,24 +1,45 @@
 <template>
-  <section class="header d-flex justify-space-between align-center">
-    <img v-holder="{ img: '88x29' }" />
+  <section class="header px-3 d-flex justify-space-between align-center">
+    <!--    <img v-holder="{ img: '88x29' }" />-->
 
     <div class="login-panel">
-      <v-btn class="btn" outlined depressed> {{ $t("sign-up") }}</v-btn>
-      <v-btn class="btn btn-gold" depressed> {{ $t("sign-in") }}</v-btn>
+      <img src="../assets/logo.png" alt="" />
+    </div>
+    <div class="login-panel" v-show="!isLogin">
+      <v-btn class="btn" outlined depressed @click="doOpenSignupDialog">
+        {{ $t("sign-up") }}
+      </v-btn>
+      <v-btn class="btn btn-gold" depressed @click="doOpenLoginDialog">
+        {{ $t("sign-in") }}
+      </v-btn>
     </div>
   </section>
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
-  name: "Header"
+  name: "Header",
+  computed:{
+    ...mapGetters({
+      isLogin: "getIsLogin"
+    })
+  },
+  methods: {
+    doOpenSignupDialog() {
+      this.$store.dispatch("openSignupDialog");
+    },
+    doOpenLoginDialog() {
+      this.$store.dispatch("openLoginDialog");
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .header {
   height: 44px;
-  padding: 0 11.5px 0 14px;
 
   .btn {
     width: 68.5px !important;
@@ -26,15 +47,23 @@ export default {
     margin: 0 2px;
     font-size: 14px;
     font-weight: 600;
-    color: rgb(172, 146, 120) !important;
+    color: $btn-color3 !important;
     border-radius: 8px;
-    border-color: rgb(172, 146, 120);
+    border-color: $btn-color3;
   }
 
   .btn-gold {
     background-image: $gradient1;
     color: white !important;
     border-width: 0;
+  }
+
+  .login-panel {
+    height: 29px;
+
+    > img {
+      height: 100%;
+    }
   }
 }
 </style>
