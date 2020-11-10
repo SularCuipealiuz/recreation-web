@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { setToken } from "@/plugins/auth";
+import { setToken, getToken, removeToken } from "@/plugins/auth";
+import { logout, verify } from "@/api/account";
 
 Vue.use(Vuex);
 
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     },
     SET_REDIRECT_OBJ(state, payload) {
       state.redirectObj = payload;
+    },
+    RESET_USERINFO(state, payload) {
+      state.userInfo = payload;
     }
   },
   actions: {
@@ -60,15 +64,37 @@ export default new Vuex.Store({
     },
     setMcPageTitle({ commit }, title) {
       commit("SET_MC_PAGE_TITLE", title);
+    },
+    checkLoginStatus({ commit }) {
+      const token = getToken();
+      verify({
+        token: token
+      }).then(res => {
+        commit("SET_USERINFO_UID", res["userId"]);
+      });
+
+      commit("SET_USERINFO_TOKEN", token);
+    },
+    doLogout({ commit }) {
+      const token = getToken();
+
+      logout({
+        token: token,
+        tenantCode: 1
+      }).then(() => {
+        commit("RESET_USERINFO", {
+          token: "",
+          name: "",
+          balance: "",
+          vip: "",
+          uid: ""
+        });
+
+        removeToken();
+      });
     }
   },
   getters: {
-    getLoginDialog(state) {
-      return state.loginDialog;
-    },
-    getSignupDialog(state) {
-      return state.signupDialog;
-    },
     getRegisterFields(state) {
       return state.registerFields;
     },

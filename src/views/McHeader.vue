@@ -1,5 +1,5 @@
 <template>
-  <section class="mc-header d-flex justify-center align-center">
+  <section class="mc-header d-flex justify-center align-center white">
     <span class="go-back" @click="goBack">
       <img src="../assets/svg/icon-menu-l-arrow.svg" alt="" />
     </span>
@@ -28,7 +28,8 @@ export default {
 <style lang="scss" scoped>
 .mc-header {
   position: relative;
-  height: 50px;
+  height: 44px;
+  min-height: 44px;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
 
   > .go-back {

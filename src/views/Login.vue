@@ -148,7 +148,7 @@ export default {
         memberPassword: "",
         key: "",
         captcha: "",
-        grantType: "password"
+        grantType: "captcha"
       },
       rules: {
         isRequired: v => !!v || this.$t("rules.required"),
@@ -171,13 +171,13 @@ export default {
   },
   methods: {
     doCloseDialog() {
-      const path =
-        this.$route.query.goBack !== undefined ? this.$route.query.goBack : "";
+      // const path = this.$route.query.goBack !== undefined ? this.$route.query.goBack : "";
+      const path = "/";
       this.$router.push(path);
     },
     doOpenSignupDialog() {
       this.$router.push({
-        path: "/SignUp",
+        path: "/sign-up",
         query: { redirect: "/", goBack: "/" }
       });
     },
@@ -185,7 +185,8 @@ export default {
       const _this = this;
       if (this.$refs.form.validate()) {
         login(_this.form).then(res => {
-          _this.$store.dispatch("setUserToken", res["token"]);
+          _this.$store.dispatch("setUserToken", "Bearer " + res["token"]);
+          _this.$store.dispatch("setUserUid", res["userId"]);
           const path =
             _this.$route.query.redirect !== undefined
               ? _this.$route.query.redirect

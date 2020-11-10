@@ -7,9 +7,9 @@ import vuetify from "@/plugins/vuetify";
 import VueI18n from "vue-i18n";
 import { languages, defaultLocale } from "@/lang/index";
 import VueHolder from "vue-holderjs";
-import animated from 'animate.css'
+import animated from "animate.css";
 
-Vue.use(animated)
+Vue.use(animated);
 Vue.use(VueI18n);
 Vue.use(VueHolder);
 

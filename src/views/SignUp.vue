@@ -111,7 +111,23 @@
           </template>
         </v-text-field>
         <v-text-field
-          v-if="showQQ"
+          v-if="showQQ['isNullable'] === true"
+          v-model="form.qq"
+          background-color="rgba(255, 255, 255, 0.2)"
+          class="input-box mb-2"
+          :placeholder="$t('tip.qq')"
+          maxlength="25"
+          hide-details="auto"
+          solo
+          rounded
+          dark
+          flat
+          prepend-icon=" "
+          append-outer-icon=" "
+          prepend-inner-icon="fab fa-qq"
+        ></v-text-field>
+        <v-text-field
+          v-else
           v-model="form.qq"
           background-color="rgba(255, 255, 255, 0.2)"
           class="input-box mb-2"
@@ -123,12 +139,28 @@
           rounded
           dark
           flat
-          :prepend-icon="showQQ['isNullable'] === true ? ' ' : '*'"
+          prepend-icon="*"
           append-outer-icon=" "
           prepend-inner-icon="fab fa-qq"
         ></v-text-field>
         <v-text-field
-          v-if="showWechat"
+          v-if="showWechat['isNullable'] === true"
+          v-model="form.wechat"
+          background-color="rgba(255, 255, 255, 0.2)"
+          class="input-box mb-2"
+          :placeholder="$t('tip.wechat')"
+          maxlength="25"
+          hide-details="auto"
+          solo
+          rounded
+          dark
+          flat
+          prepend-icon=" "
+          append-outer-icon=" "
+          prepend-inner-icon="fab fa-weixin"
+        ></v-text-field>
+        <v-text-field
+          v-else
           v-model="form.wechat"
           background-color="rgba(255, 255, 255, 0.2)"
           class="input-box mb-2"
@@ -140,12 +172,28 @@
           rounded
           dark
           flat
-          :prepend-icon="showWechat['isNullable'] === true ? ' ' : '*'"
+          prepend-icon="*"
           append-outer-icon=" "
           prepend-inner-icon="fab fa-weixin"
         ></v-text-field>
         <v-text-field
-          v-if="showEmail"
+          v-if="showEmail['isNullable'] === true"
+          v-model="form.email"
+          background-color="rgba(255, 255, 255, 0.2)"
+          class="input-box mb-2"
+          :placeholder="$t('tip.email')"
+          maxlength="25"
+          hide-details="auto"
+          solo
+          rounded
+          dark
+          flat
+          prepend-icon=" "
+          append-outer-icon=" "
+          prepend-inner-icon="fal fa-envelope"
+        ></v-text-field>
+        <v-text-field
+          v-else
           v-model="form.email"
           background-color="rgba(255, 255, 255, 0.2)"
           class="input-box mb-2"
@@ -157,12 +205,12 @@
           rounded
           dark
           flat
-          :prepend-icon="showEmail['isNullable'] === true ? ' ' : '*'"
+          prepend-icon="*"
           append-outer-icon=" "
           prepend-inner-icon="fal fa-envelope"
         ></v-text-field>
         <v-text-field
-          v-if="showPhone"
+          v-if="showPhone['isNullable'] === true"
           v-model="form.phone"
           background-color="rgba(255, 255, 255, 0.2)"
           class="input-box mb-2"
@@ -174,12 +222,45 @@
           rounded
           dark
           flat
-          :prepend-icon="showPhone['isNullable'] === true ? ' ' : '*'"
+          prepend-icon=" "
           append-outer-icon=" "
           prepend-inner-icon="fal fa-mobile-alt"
         ></v-text-field>
         <v-text-field
-          v-if="showPhone"
+          v-else
+          v-model="form.phone"
+          background-color="rgba(255, 255, 255, 0.2)"
+          class="input-box mb-2"
+          :placeholder="$t('tip.mobile')"
+          :rules="[rules.isRequired]"
+          maxlength="25"
+          hide-details="auto"
+          solo
+          rounded
+          dark
+          flat
+          prepend-icon="*"
+          append-outer-icon=" "
+          prepend-inner-icon="fal fa-mobile-alt"
+        ></v-text-field>
+        <v-text-field
+          v-if="showPhone['isNullable'] === true"
+          v-model="form.phoneCaptcha"
+          background-color="rgba(255, 255, 255, 0.2)"
+          class="input-box mb-2"
+          :placeholder="$t('tip.mobile-captcha')"
+          maxlength="25"
+          hide-details="auto"
+          solo
+          rounded
+          dark
+          flat
+          prepend-icon=" "
+          append-outer-icon=" "
+          prepend-inner-icon="far fa-comment-alt-check"
+        ></v-text-field>
+        <v-text-field
+          v-else
           v-model="form.phoneCaptcha"
           background-color="rgba(255, 255, 255, 0.2)"
           class="input-box mb-2"
@@ -191,7 +272,7 @@
           rounded
           dark
           flat
-          :prepend-icon="showPhone['isNullable'] === true ? ' ' : '*'"
+          prepend-icon="*"
           append-outer-icon=" "
           prepend-inner-icon="far fa-comment-alt-check"
         ></v-text-field>
@@ -303,21 +384,27 @@ export default {
   },
   methods: {
     doCloseDialog() {
-      const path =
-        this.$route.query.goBack !== undefined ? this.$route.query.goBack : "";
+      // const path = this.$route.query.goBack !== undefined ? this.$route.query.goBack : "";
+      const path = "/"
       this.$router.push(path);
     },
     doOpenLoginDialog() {
       this.$router.push({
-        path: "/SignIn",
+        path: "/sign-in",
         query: { redirect: "/", goBack: "/" }
       });
     },
     validate() {
       const _this = this;
       if (this.$refs.form.validate()) {
-        register(_this.form).then(() => {
-          // _this.$router.push({ name: "Home" });
+        register(_this.form).then(res => {
+          _this.$store.dispatch("setUserToken", "Bearer " + res["token"]);
+          _this.$store.dispatch("setUserUid", res["userId"]);
+          const path =
+            _this.$route.query.redirect !== undefined
+              ? _this.$route.query.redirect
+              : "";
+          _this.$router.push(path);
         });
       }
     },

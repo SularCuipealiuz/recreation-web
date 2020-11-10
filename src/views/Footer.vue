@@ -156,7 +156,7 @@ export default {
           break;
         }
       }
-      this.$router.push({ name: name });
+      this.$router.push({ name: name }).catch(err => err);
     }
   }
 };

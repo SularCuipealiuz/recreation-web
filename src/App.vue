@@ -1,16 +1,28 @@
 <template>
   <v-app id="app" class="d-flex flex-column justify-start align-center">
+    <v-alert dense dismissible type="info" class="alert-panel rounded-0">
+      I'm a dense alert with a <strong>type</strong> of info
+    </v-alert>
     <router-view name="head" />
-    <router-view class="fill-height" name="body" />
+    <div class="body-panel">
+      <transition name="fade">
+        <router-view class="fill-height" name="body" />
+      </transition>
+    </div>
     <router-view class="fix-foot" name="foot" />
-    <sign-up v-if="signupDialogState"></sign-up>
-    <login v-if="loginDialogState"></login>
+    <router-view name="popModal"></router-view>
   </v-app>
 </template>
 
 <style lang="scss">
 html {
   font-size: 16px;
+  overflow-y: hidden;
+  height: 100vh;
+}
+
+body {
+  height: 100%;
 }
 
 #app {
@@ -20,6 +32,8 @@ html {
   text-align: center;
   color: #2c3e50;
 
+  height: 100%;
+
   .fix-foot {
     position: fixed;
     bottom: 0;
@@ -28,32 +42,15 @@ html {
 }
 </style>
 <script>
-import SignUp from "@/views/SignUp";
-import Login from "@/views/Login";
-import { mapGetters } from "vuex";
-import { registerConfig, verify } from "@/api/account";
+import { registerConfig } from "@/api/account";
 import { getToken } from "@/plugins/auth";
 
 export default {
-  components: { SignUp, Login },
   data() {
     return {};
   },
-  mounted() {
+  created() {
     const _this = this;
-    let token = getToken();
-    console.log("token", token);
-
-    if (token !== null && token !== undefined) {
-      verify({
-        token: "Bearer " + token
-      }).then(res => {
-        _this.$store.dispatch("setUserUid", res["userId"]);
-      });
-
-      this.$store.dispatch("setUserToken", token);
-    }
-
     registerConfig().then(res => {
       _this.$store.dispatch("setSiteRegisterFields", res["siteRegistFields"]);
       _this.$store.dispatch(
@@ -62,11 +59,47 @@ export default {
       );
     });
   },
-  computed: {
-    ...mapGetters({
-      loginDialogState: "getLoginDialog",
-      signupDialogState: "getSignupDialog"
-    })
+  mounted() {
+    const _this = this;
+    let token = getToken();
+    if (token !== null && token !== undefined) {
+      _this.$store.dispatch("checkLoginStatus", token).then(e => {
+        console.log("e", e);
+      });
+    }
   }
 };
 </script>
+<style lang="scss" scoped>
+#app {
+  position: relative;
+  background-color: #f8f8f8;
+
+  .alert-panel {
+    position: absolute;
+    top: -50px;
+    left: 0;
+
+    width: 100%;
+    z-index: 900;
+  }
+
+  .body-panel {
+    > * {
+      width: 100%;
+    }
+  }
+}
+</style>
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateX(10px);
+}
+</style>

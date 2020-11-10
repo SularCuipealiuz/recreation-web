@@ -62,7 +62,8 @@
     "bonus": "",
     "massageCenter": "",
     "helpCenter": "",
-    "wallet": ""
+    "wallet": "",
+    "logout": ""
   },
   "passwordManage": {
     "signInPassword": "",
@@ -71,5 +72,9 @@
     "newPassword": "",
     "confirmPassword": "",
     "withdrawalNewPassword": ""
+  },
+  "promo": {
+    "promoDate": "",
+    "promoCenter": ""
   }
 }

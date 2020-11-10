@@ -1,6 +1,6 @@
 <template>
-  <section class="grey lighten-4 password-manage">
-    <v-btn-toggle class="switch-button my-3" v-model="toggleExclusive">
+  <section class="password-manage">
+    <v-btn-toggle class="switch-button my-3 mx-3" v-model="toggleExclusive">
       <v-btn class="switch-item" :class="{ 'btn-bg': toggleExclusive === 0 }">
         {{ $t("passwordManage.signInPassword") }}
       </v-btn>
@@ -149,7 +149,7 @@ export default {
         });
       } else if (this.toggleExclusive === 1) {
         changeWithdrawPassword({
-          id: this.uid,
+          id: this.userInfo.uid,
           newPassword: this.form.newPassword,
           confirmPassword: this.form.confirmPassword
         });
@@ -163,18 +163,6 @@ export default {
 .input-panel {
   height: 60px;
   margin-bottom: -10px;
-}
-
-.switch-button {
-  width: 95%;
-  border-radius: 10px;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
-
-  .switch-item {
-    width: 50%;
-    height: 36px !important;
-    border-width: inherit !important;
-  }
 }
 
 .btn {

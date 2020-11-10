@@ -11,6 +11,8 @@ import PasswordManage from "@/views/PasswordManage";
 import SignUp from "@/views/SignUp";
 import Login from "@/views/Login";
 import Promo from "@/views/Promo";
+import PromoDetail from "@/views/PromoDetail";
+import MessageCenter from "@/views/MessageCenter";
 
 Vue.use(VueRouter);
 
@@ -25,30 +27,37 @@ const routes = [
     }
   },
   {
-    path: "/",
+    path: "/promo/",
     name: "Promo",
     components: {
-      head: Header,
+      head: McHeader,
       body: Promo,
       foot: Footer
     }
   },
   {
-    path: "/SignIn",
+    path: "/promo/:id",
+    components: {
+      head: McHeader,
+      body: PromoDetail
+    }
+  },
+  {
+    path: "/sign-in",
     name: "SignIn",
     components: {
-      body: Login
+      popModal: Login
     }
   },
   {
-    path: "/SignUp",
+    path: "/sign-up",
     name: "SignUp",
     components: {
-      body: SignUp
+      popModal: SignUp
     }
   },
   {
-    path: "/MemberCenter",
+    path: "/member-center",
     name: "MemberCenter",
     meta: {
       requireAuth: true
@@ -59,15 +68,25 @@ const routes = [
     }
   },
   {
-    path: "/PasswordManage",
+    path: "/password-manage",
     name: "PasswordManage",
     meta: {
       requireAuth: true
     },
     components: {
       head: McHeader,
-      body: PasswordManage,
-      foot: Footer
+      body: PasswordManage
+    }
+  },
+  {
+    path: "/message-center",
+    name: "MessageCenter",
+    meta: {
+      requireAuth: true
+    },
+    components: {
+      head: McHeader,
+      body: MessageCenter
     }
   }
 ];
@@ -79,17 +98,31 @@ const router = new VueRouter({
 });
 
 router.beforeEach(function(to, from, next) {
+  if (from.name === null && to.name !== "Home") {
+    router.push({
+      path: "/"
+    });
+  }
   if (to.matched.some(res => res.meta.requireAuth)) {
+    // store.dispatch("checkLoginStatus").then(() => {
+    //   if (store.getters.getIsLogin !== true) {
+    //     router.push({
+    //       path: "/sign-in",
+    //       query: { redirect: to.fullPath, goBack: from.fullPath }
+    //     });
+    //   } else {
+    //     next();
+    //   }
+    // });
+
     if (store.getters.getIsLogin !== true) {
       router.push({
-        path: "/SignIn",
+        path: "/sign-in",
         query: { redirect: to.fullPath, goBack: from.fullPath }
       });
     } else {
       next();
     }
-
-    // Redirect
   } else {
     next();
   }

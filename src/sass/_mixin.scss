@@ -30,10 +30,25 @@ $badge2: #db6372;
 $badge3: #6AAAF5;
 $badge4: #FFDC90;
 
+
+$main-color: #B1987F;
+
 @mixin FontFamilyDINPro {
   font-family: "DIN Condensed Web";
 }
 
 .justify-space-evenly {
   justify-content: space-evenly !important;
+}
+
+.switch-button {
+  border-radius: 10px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+
+  .switch-item {
+    flex: 1 0 auto;
+    height: 36px !important;
+    border-width: inherit !important;
+  }
 }

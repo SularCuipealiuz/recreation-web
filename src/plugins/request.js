@@ -11,7 +11,7 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
-    if (store.getters.token) {
+    if (getToken() !== undefined && getToken() !== null) {
       config.headers["token"] = getToken();
     }
 
@@ -41,6 +41,12 @@ service.interceptors.response.use(
     }
 
     if (res.code !== 0) {
+      if (res.code === 40001) {
+        store.dispatch("doLogout").then(res => {
+          console.log("res", res);
+        });
+      }
+
       return Promise.reject(new Error(res.message || "Error"));
     } else {
       return res.data;

@@ -1,5 +1,5 @@
 <template>
-  <section class="px-3 d-flex flex-column justify-start align-center">
+  <section class="px-3 d-flex flex-column justify-start align-center white">
     <!--    輪播-->
     <Carousel></Carousel>
 

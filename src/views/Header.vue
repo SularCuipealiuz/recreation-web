@@ -1,5 +1,5 @@
 <template>
-  <section class="header px-3 d-flex justify-space-between align-center">
+  <section class="header px-3 d-flex justify-space-between align-center white">
     <!--    <img v-holder="{ img: '88x29' }" />-->
 
     <div class="login-panel">
@@ -30,14 +30,14 @@ export default {
     doOpenSignupDialog() {
       // this.$store.dispatch("openSignupDialog");
       this.$router.push({
-        path: "/SignUp",
+        path: "/sign-up",
         query: { redirect: "/", goBack: "/" }
       });
     },
     doOpenLoginDialog() {
       // this.$store.dispatch("openLoginDialog");
       this.$router.push({
-        path: "/SignIn",
+        path: "/sign-in",
         query: { redirect: "/", goBack: "/" }
       });
     }
@@ -48,6 +48,7 @@ export default {
 <style lang="scss" scoped>
 .header {
   height: 44px;
+  min-height: 44px;
 
   .btn {
     width: 68.5px !important;

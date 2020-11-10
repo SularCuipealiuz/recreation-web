@@ -26,7 +26,7 @@ export function avatar(data) {
 
 export function changePassword(data) {
   return request({
-    url: "/memberWeb/memberCenter/password",
+    url: "/memberWeb/memberCenter/edit/password",
     method: "post",
     data
   });
@@ -34,7 +34,7 @@ export function changePassword(data) {
 
 export function changeWithdrawPassword(data) {
   return request({
-    url: "/memberWeb/memberCenter/withdrawPassword",
+    url: "/memberWeb/memberCenter/edit/withdrawPassword",
     method: "post",
     data
   });

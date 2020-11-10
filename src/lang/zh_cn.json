@@ -62,7 +62,8 @@
     "bonus": "返水奖励",
     "massageCenter": "消息中心",
     "helpCenter": "帮助中心",
-    "wallet": "余额宝"
+    "wallet": "余额宝",
+    "logout": "登出"
   },
   "passwordManage": {
     "signInPassword": "登录密码",
@@ -71,5 +72,9 @@
     "newPassword": "新密码",
     "confirmPassword": "确认密码",
     "withdrawalNewPassword": "请输入密码"
+  },
+  "promo": {
+    "promoDate": "活动时间",
+    "promoCenter": "优惠中心"
   }
 }
