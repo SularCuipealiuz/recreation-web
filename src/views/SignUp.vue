@@ -385,7 +385,7 @@ export default {
   methods: {
     doCloseDialog() {
       // const path = this.$route.query.goBack !== undefined ? this.$route.query.goBack : "";
-      const path = "/"
+      const path = "/";
       this.$router.push(path);
     },
     doOpenLoginDialog() {
@@ -397,15 +397,19 @@ export default {
     validate() {
       const _this = this;
       if (this.$refs.form.validate()) {
-        register(_this.form).then(res => {
-          _this.$store.dispatch("setUserToken", "Bearer " + res["token"]);
-          _this.$store.dispatch("setUserUid", res["userId"]);
-          const path =
-            _this.$route.query.redirect !== undefined
-              ? _this.$route.query.redirect
-              : "";
-          _this.$router.push(path);
-        });
+        register(_this.form)
+          .then(res => {
+            _this.$store.dispatch("setUserToken", "Bearer " + res["token"]);
+            _this.$store.dispatch("setUserUid", res["userId"]);
+            const path =
+              _this.$route.query.redirect !== undefined
+                ? _this.$route.query.redirect
+                : "";
+            _this.$router.push(path);
+          })
+          .catch(() => {
+            _this.getCaptchaImg();
+          });
       }
     },
     startRotate() {

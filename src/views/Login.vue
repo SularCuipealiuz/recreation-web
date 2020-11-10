@@ -184,15 +184,19 @@ export default {
     validate() {
       const _this = this;
       if (this.$refs.form.validate()) {
-        login(_this.form).then(res => {
-          _this.$store.dispatch("setUserToken", "Bearer " + res["token"]);
-          _this.$store.dispatch("setUserUid", res["userId"]);
-          const path =
-            _this.$route.query.redirect !== undefined
-              ? _this.$route.query.redirect
-              : "";
-          _this.$router.push(path);
-        });
+        login(_this.form)
+          .then(res => {
+            _this.$store.dispatch("setUserToken", "Bearer " + res["token"]);
+            _this.$store.dispatch("setUserUid", res["userId"]);
+            const path =
+              _this.$route.query.redirect !== undefined
+                ? _this.$route.query.redirect
+                : "";
+            _this.$router.push(path);
+          })
+          .catch(() => {
+            _this.getCaptchaImg();
+          });
       }
     },
     startRotate() {
