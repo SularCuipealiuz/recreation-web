@@ -3,6 +3,7 @@
     block
     text
     class="mc-btn font-weight-bold text-subtitle-2 d-flex justify-start align-center"
+    @click="callBack"
   >
     <slot name="icon"></slot>
     {{ label }}
@@ -19,8 +20,20 @@ export default {
     label: {
       type: String,
       default: ""
+    },
+    method: {
+      type: Function
+    },
+    target: {
+      type: String,
+      default: ""
     }
   },
+  methods: {
+    callBack() {
+      this.method(this.target);
+    }
+  }
 };
 </script>
 

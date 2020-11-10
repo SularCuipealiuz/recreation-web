@@ -99,32 +99,34 @@ const router = new VueRouter({
 
 router.beforeEach(function(to, from, next) {
   if (from.name === null && to.name !== "Home") {
-    router.push({
-      path: "/"
-    });
-  }
-  if (to.matched.some(res => res.meta.requireAuth)) {
-    // store.dispatch("checkLoginStatus").then(() => {
-    //   if (store.getters.getIsLogin !== true) {
-    //     router.push({
-    //       path: "/sign-in",
-    //       query: { redirect: to.fullPath, goBack: from.fullPath }
-    //     });
-    //   } else {
-    //     next();
-    //   }
+    // router.push({
+    //   path: "/"
     // });
+    next("/");
+  } else {
+    if (to.matched.some(res => res.meta.requireAuth)) {
+      // store.dispatch("checkLoginStatus").then(() => {
+      //   if (store.getters.getIsLogin !== true) {
+      //     router.push({
+      //       path: "/sign-in",
+      //       query: { redirect: to.fullPath, goBack: from.fullPath }
+      //     });
+      //   } else {
+      //     next();
+      //   }
+      // });
 
-    if (store.getters.getIsLogin !== true) {
-      router.push({
-        path: "/sign-in",
-        query: { redirect: to.fullPath, goBack: from.fullPath }
-      });
+      if (store.getters.getIsLogin !== true) {
+        router.push({
+          path: "/sign-in",
+          query: { redirect: to.fullPath, goBack: from.fullPath }
+        });
+      } else {
+        next();
+      }
     } else {
       next();
     }
-  } else {
-    next();
   }
 });
 

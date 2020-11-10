@@ -15,7 +15,11 @@
       </v-row>
       <v-divider></v-divider>
       <v-row class="white py-1">
-        <member-center-item :label="$t('memberCenter.passwordManage')" @click="goPage('PasswordManage')">
+        <member-center-item
+          :label="$t('memberCenter.passwordManage')"
+          :method="goPage"
+          :target="'PasswordManage'"
+        >
           <template slot="icon">
             <img class="mr-2" src="../assets/svg/icon-s-lock.svg" alt="" />
           </template>
@@ -39,9 +43,9 @@
         <member-center-item :label="$t('memberCenter.transactionHistory')">
           <template slot="icon">
             <img
-                class="mr-2"
-                src="../assets/svg/icon-s-bet-bet-record.svg"
-                alt=""
+              class="mr-2"
+              src="../assets/svg/icon-s-bet-bet-record.svg"
+              alt=""
             />
           </template>
         </member-center-item>
@@ -50,11 +54,7 @@
       <v-row class="white py-1">
         <member-center-item :label="$t('memberCenter.promoHistory')">
           <template slot="icon">
-            <img
-                class="mr-2"
-                src="../assets/svg/icon-s-coupon.svg"
-                alt=""
-            />
+            <img class="mr-2" src="../assets/svg/icon-s-coupon.svg" alt="" />
           </template>
         </member-center-item>
       </v-row>
@@ -63,23 +63,19 @@
       <v-row class="white py-1">
         <member-center-item :label="$t('memberCenter.bonus')">
           <template slot="icon">
-            <img
-                class="mr-2"
-                src="../assets/svg/icon-s-rebate.svg"
-                alt=""
-            />
+            <img class="mr-2" src="../assets/svg/icon-s-rebate.svg" alt="" />
           </template>
         </member-center-item>
       </v-row>
       <v-divider></v-divider>
       <v-row class="white py-1">
-        <member-center-item :label="$t('memberCenter.massageCenter')">
+        <member-center-item
+          :label="$t('memberCenter.massageCenter')"
+          :method="goPage"
+          :target="'MessageCenter'"
+        >
           <template slot="icon">
-            <img
-                class="mr-2"
-                src="../assets/svg/icon-s-news.svg"
-                alt=""
-            />
+            <img class="mr-2" src="../assets/svg/icon-s-news.svg" alt="" />
           </template>
         </member-center-item>
       </v-row>
@@ -87,11 +83,7 @@
       <v-row class="white py-1">
         <member-center-item :label="$t('memberCenter.helpCenter')">
           <template slot="icon">
-            <img
-                class="mr-2"
-                src="../assets/svg/icon-s-help.svg"
-                alt=""
-            />
+            <img class="mr-2" src="../assets/svg/icon-s-help.svg" alt="" />
           </template>
         </member-center-item>
       </v-row>
@@ -100,11 +92,7 @@
       <v-row class="white py-1">
         <member-center-item :label="$t('memberCenter.logout')">
           <template slot="icon">
-            <img
-                class="mr-2"
-                src="../assets/svg/icon-deposit.svg"
-                alt=""
-            />
+            <img class="mr-2" src="../assets/svg/icon-deposit.svg" alt="" />
           </template>
         </member-center-item>
       </v-row>
@@ -123,8 +111,10 @@ export default {
     this.$store.dispatch("changeActivePage", "profile");
   },
   methods: {
+    test(msg) {
+      console.log(msg);
+    },
     goPage(target) {
-      console.log("target", target);
       this.$router.push({ name: target });
     }
   }
