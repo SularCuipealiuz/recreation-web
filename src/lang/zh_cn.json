@@ -9,7 +9,13 @@
     "askMC": "如有需要请联系客服",
     "registered": "注册新用户",
     "forgetPassword": "忘记密码?",
-    "submit": "提交"
+    "submit": "提交",
+    "expand": "展开",
+    "collapse": "收合",
+    "edit": "编辑讯息",
+    "read": "全部已读",
+    "cancel": "取消",
+    "selectAll": "全選"
   },
   "footer-tab": {
     "home": "首页",
@@ -76,5 +82,10 @@
   "promo": {
     "promoDate": "活动时间",
     "promoCenter": "优惠中心"
+  },
+  "messageCenter": {
+    "notice": "通知",
+    "announcement": "公告",
+    "opinion": "意见箱"
   }
 }

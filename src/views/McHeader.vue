@@ -4,6 +4,9 @@
       <img src="../assets/svg/icon-menu-l-arrow.svg" alt="" />
     </span>
     <span class="text--black subtitle-1 font-weight-bold">{{ pageTitle }}</span>
+    <span v-if="option" class="ellipsis-btn" @click="toggleMcOption">
+      <v-icon>fal fa-ellipsis-h</v-icon>
+    </span>
   </section>
 </template>
 
@@ -12,15 +15,19 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "McHeader",
+  computed: {
+    ...mapGetters({
+      pageTitle: "getMcPageTitle",
+      option: "getMcHeaderOption"
+    })
+  },
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    toggleMcOption() {
+      this.$store.dispatch("doToggleMcOption", true)
     }
-  },
-  computed: {
-    ...mapGetters({
-      pageTitle: "getMcPageTitle"
-    })
   }
 };
 </script>
@@ -45,6 +52,11 @@ export default {
     > img {
       height: 100%;
     }
+  }
+
+  .ellipsis-btn {
+    position: absolute;
+    right: 14px;
   }
 }
 </style>

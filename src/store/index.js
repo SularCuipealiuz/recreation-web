@@ -17,7 +17,10 @@ export default new Vuex.Store({
     },
     registerFields: [],
     verificationPattern: 0,
-    mcPageTitle: ""
+    mcPageTitle: "",
+    mcHeaderOption: false,
+    mcOptionDialog: false,
+    mcEditPanel: false
   },
   mutations: {
     SET_ACTIVE_PAGE(state, string) {
@@ -43,6 +46,15 @@ export default new Vuex.Store({
     },
     RESET_USERINFO(state, payload) {
       state.userInfo = payload;
+    },
+    SET_MC_HEADER_OPTION(state, boolean) {
+      state.mcHeaderOption = boolean;
+    },
+    TOGGLE_MC_OPTION(state, boolean) {
+      state.mcOptionDialog = boolean;
+    },
+    TOGGLE_EDIT_PANEL(state, boolean) {
+      state.mcEditPanel = boolean;
     }
   },
   actions: {
@@ -92,6 +104,15 @@ export default new Vuex.Store({
 
         removeToken();
       });
+    },
+    doToggleMcHeaderOption({ commit }, boolean) {
+      commit("SET_MC_HEADER_OPTION", boolean);
+    },
+    doToggleMcOption({ commit }, boolean) {
+      commit("TOGGLE_MC_OPTION", boolean);
+    },
+    doToggleEditPanel({ commit }, boolean) {
+      commit("TOGGLE_EDIT_PANEL", boolean);
     }
   },
   getters: {
@@ -115,6 +136,15 @@ export default new Vuex.Store({
     },
     getUserInfo(state) {
       return state.userInfo;
+    },
+    getMcHeaderOption(state) {
+      return state.mcHeaderOption;
+    },
+    getMcOptionDialog(state) {
+      return state.mcOptionDialog;
+    },
+    getMcEditPanel(state) {
+      return state.mcEditPanel;
     }
   }
 });

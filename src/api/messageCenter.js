@@ -1,10 +1,9 @@
 import request from "@/plugins/request";
 
-export function siteMessage(data) {
+export function siteMessage() {
   return request({
     url: "/memberWeb/messageCenter/siteMessage",
-    method: "post",
-    data
+    method: "post"
   });
 }
 
@@ -24,11 +23,10 @@ export function messageDelete(data) {
   });
 }
 
-export function siteBulletin(data) {
+export function siteBulletin() {
   return request({
     url: "/memberWeb/messageCenter/siteBulletin",
-    method: "post",
-    data
+    method: "post"
   });
 }
 

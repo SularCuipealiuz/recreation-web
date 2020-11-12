@@ -1,10 +1,10 @@
 <template>
   <section class="password-manage">
     <v-btn-toggle class="switch-button my-3 mx-3" v-model="toggleExclusive">
-      <v-btn class="switch-item" :class="{ 'btn-bg': toggleExclusive === 0 }">
+      <v-btn class="switch-item white" :class="{ 'btn-bg': toggleExclusive === 0 }">
         {{ $t("passwordManage.signInPassword") }}
       </v-btn>
-      <v-btn class="switch-item" :class="{ 'btn-bg': toggleExclusive === 1 }">
+      <v-btn class="switch-item white" :class="{ 'btn-bg': toggleExclusive === 1 }">
         {{ $t("passwordManage.withdrawalPassword") }}
       </v-btn>
     </v-btn-toggle>

@@ -9,7 +9,13 @@
     "askMC": "",
     "registered": "Sign Up",
     "forgetPassword": "Forget Password?",
-    "submit": "Submit"
+    "submit": "Submit",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "edit": "",
+    "read": "",
+    "cancel": "",
+    "selectAll": ""
   },
   "footer-tab": {
     "home": "Home",
@@ -76,5 +82,10 @@
   "promo": {
     "promoDate": "",
     "promoCenter": ""
+  },
+  "messageCenter": {
+    "notice": "",
+    "announcement": "",
+    "opinion": ""
   }
 }

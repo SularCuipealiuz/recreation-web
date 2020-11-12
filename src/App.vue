@@ -3,7 +3,9 @@
     <v-alert dense dismissible type="info" class="alert-panel rounded-0">
       I'm a dense alert with a <strong>type</strong> of info
     </v-alert>
-    <router-view name="head" />
+    <transition name="fade">
+      <router-view name="head" />
+    </transition>
     <div class="body-panel">
       <transition name="fade">
         <router-view class="fill-height" name="body" />
@@ -92,13 +94,11 @@ export default {
 }
 </style>
 <style>
-.fade-enter-active,
-.fade-leave-active {
+.fade-enter-active {
   transition: all 0.3s ease;
 }
 
-.fade-enter,
-.fade-leave-to {
+.fade-enter {
   opacity: 0;
   transform: translateX(10px);
 }

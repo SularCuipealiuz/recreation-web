@@ -9,7 +9,13 @@
     "askMC": "如果有需要請聯繫客服",
     "registered": "註冊新用戶",
     "forgetPassword": "忘記密碼?",
-    "submit": "提交"
+    "submit": "提交",
+    "expand": "展開",
+    "collapse": "收合",
+    "edit": "編輯訊息",
+    "read": "全部已讀",
+    "cancel": "取消",
+    "selectAll": "全选"
   },
   "footer-tab": {
     "home": "首頁",
@@ -76,5 +82,10 @@
   "promo": {
     "promoDate": "活動時間",
     "promoCenter": "優惠中心"
+  },
+  "messageCenter": {
+    "notice": "通知",
+    "announcement": "公告",
+    "opinion": "意見箱"
   }
 }
