@@ -1,6 +1,9 @@
 <template>
-  <section class="mc-header d-flex justify-center align-center white">
-    <span class="go-back" @click="goBack">
+  <section
+    class="mc-header d-flex justify-center align-center white"
+    :class="{ shadow: showBack }"
+  >
+    <span v-if="showBack" class="go-back" @click="goBack">
       <img src="../assets/svg/icon-menu-l-arrow.svg" alt="" />
     </span>
     <span class="text--black subtitle-1 font-weight-bold">{{ pageTitle }}</span>
@@ -18,7 +21,8 @@ export default {
   computed: {
     ...mapGetters({
       pageTitle: "getMcPageTitle",
-      option: "getMcHeaderOption"
+      option: "getMcHeaderOption",
+      showBack: "getMcBackBtn"
     })
   },
   methods: {
@@ -26,7 +30,7 @@ export default {
       this.$router.go(-1);
     },
     toggleMcOption() {
-      this.$store.dispatch("doToggleMcOption", true)
+      this.$store.dispatch("doToggleMcOption", true);
     }
   }
 };
@@ -37,7 +41,10 @@ export default {
   position: relative;
   height: 44px;
   min-height: 44px;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+
+  &.shadow {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+  }
 
   > .go-back {
     height: 100%;

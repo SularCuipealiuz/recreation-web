@@ -6,16 +6,59 @@
     <transition name="fade">
       <router-view name="head" />
     </transition>
-    <div class="body-panel">
+    <v-main class="flex body-panel">
       <transition name="fade">
-        <router-view class="fill-height" name="body" />
+        <router-view class="flex" name="body" />
       </transition>
-    </div>
+    </v-main>
     <router-view class="fix-foot" name="foot" />
     <router-view name="popModal"></router-view>
+    <v-overlay v-show="showBottomDialog"></v-overlay>
   </v-app>
 </template>
 
+<style lang="scss"></style>
+<script>
+import { registerConfig } from "@/api/account";
+import { getToken } from "@/plugins/auth";
+import {mapGetters} from "vuex";
+
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapGetters({
+      showBottomDialog: "getDialogVisible"
+    })
+  },
+  created() {
+    const _this = this;
+    registerConfig().then(res => {
+      _this.$store.dispatch("setSiteRegisterFields", res["siteRegistFields"]);
+      _this.$store.dispatch(
+        "setVerificationPattern",
+        res["verificationPattern"]
+      );
+    });
+  },
+  mounted() {
+    const _this = this;
+    let token = getToken();
+    if (token !== null && token !== undefined) {
+      _this.$store.dispatch("checkLoginStatus", token).then(e => {
+        console.log("e", e);
+      });
+    }
+  },
+  methods: {
+    selectBankItem(element) {
+      this.$store.dispatch("selectBankItem", element.desc);
+      this.$store.dispatch("toggleBankList", false);
+    }
+  }
+};
+</script>
 <style lang="scss">
 html {
   font-size: 16px;
@@ -42,37 +85,7 @@ body {
     width: 100%;
   }
 }
-</style>
-<script>
-import { registerConfig } from "@/api/account";
-import { getToken } from "@/plugins/auth";
 
-export default {
-  data() {
-    return {};
-  },
-  created() {
-    const _this = this;
-    registerConfig().then(res => {
-      _this.$store.dispatch("setSiteRegisterFields", res["siteRegistFields"]);
-      _this.$store.dispatch(
-        "setVerificationPattern",
-        res["verificationPattern"]
-      );
-    });
-  },
-  mounted() {
-    const _this = this;
-    let token = getToken();
-    if (token !== null && token !== undefined) {
-      _this.$store.dispatch("checkLoginStatus", token).then(e => {
-        console.log("e", e);
-      });
-    }
-  }
-};
-</script>
-<style lang="scss" scoped>
 #app {
   position: relative;
   background-color: #f8f8f8;
@@ -87,6 +100,8 @@ export default {
   }
 
   .body-panel {
+    height: calc(100vh - 44px);
+
     > * {
       width: 100%;
     }

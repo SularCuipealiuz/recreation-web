@@ -1,6 +1,6 @@
 import request from "@/plugins/request";
 
-export function info(data) {
+export function getUserInfo(data) {
   return request({
     url: "/memberWeb/memberCenter/info",
     method: "post",
@@ -37,5 +37,12 @@ export function changeWithdrawPassword(data) {
     url: "/memberWeb/memberCenter/edit/withdrawPassword",
     method: "post",
     data
+  });
+}
+
+export function bankList() {
+  return request({
+    url: "/tenantManage/dic/withdraw/initBank",
+    method: "post"
   });
 }

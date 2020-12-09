@@ -2,6 +2,8 @@
   <v-btn
     block
     text
+    height="49"
+    small
     class="mc-btn font-weight-bold text-subtitle-2 d-flex justify-start align-center"
     @click="callBack"
   >
@@ -31,7 +33,11 @@ export default {
   },
   methods: {
     callBack() {
-      this.method(this.target);
+      if(this.target !== "function") {
+        this.method(this.target);
+      } else {
+        this.method();
+      }
     }
   }
 };

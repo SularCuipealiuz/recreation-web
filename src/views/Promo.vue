@@ -22,12 +22,16 @@
 
 <script>
 import PromoItem from "@/components/PromoItem";
+import {activity} from "@/api/activityCenter";
 
 export default {
   name: "Promo",
   components: { PromoItem },
   mounted() {
     this.$store.dispatch("setMcPageTitle", this.$t("promo.promoCenter"));
+    activity().then(res =>{
+      console.log(res)
+    })
   },
   data() {
     return {

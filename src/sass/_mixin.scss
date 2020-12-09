@@ -3,6 +3,7 @@
   src: url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.eot");
   src: url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.woff") format("woff"), url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/69dbc1186412d7831b88d8a78a360360.svg#DIN Condensed Web") format("svg");
 }
+
 $gradient1: linear-gradient(to bottom, #dccab8 0%, #d2b496 50%, #d2b496 100%);
 $gradient2: linear-gradient(to bottom, #6d7fa1 0%, #a6b1c8 100%);
 $gradient3: linear-gradient(to top, #ed9aa7 0%, #dc6979 100%);
@@ -50,5 +51,88 @@ $main-color: #B1987F;
     flex: 1 0 auto;
     height: 36px !important;
     border-width: inherit !important;
+  }
+}
+
+.relative {
+  position: relative;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+}
+
+.custom-input-panel fieldset {
+  border-width: 0px !important;
+}
+
+.custom-input-panel .v-input__prepend-outer {
+  margin-right: 0px !important;
+}
+
+.custom-input-panel .v-input__prepend-outer {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  margin-top: 0 !important;
+  margin-right: 2px !important;
+}
+
+.custom-input-panel .btn-bg {
+  color: white;
+  background: linear-gradient(
+                  to right,
+                  rgba(220, 202, 184, 1) 0%,
+                  rgba(210, 180, 150, 1) 100%
+  ) !important;
+}
+
+.custom-input-panel .btn-bg span {
+  color: white;
+}
+
+.custom-input-panel .v-input__slot::after {
+  border-color: transparent !important;
+}
+
+.custom-input-panel .v-input__slot::before {
+  border-color: transparent !important;
+}
+
+.custom-input-panel .v-label {
+  font-weight: 700;
+  font-size: 18px !important;
+}
+
+.custom-input-panel input {
+  font-size: 14px !important;
+}
+
+.bottom-panel {
+  height: auto !important;
+  max-height: 80% !important;
+  top: auto !important;
+  bottom: 0 !important;
+  border-top-right-radius: 15px !important;
+  border-top-left-radius: 15px !important;
+
+  .v-toolbar__content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .v-btn {
+      position: absolute;
+      left: 16px;
+      margin: auto;
+
+      .v-btn__content {
+        color: #c09267;
+        font-weight: bold;
+      }
+    }
+
+    .v-toolbar__title {
+      padding-left: 0px;
+    }
   }
 }

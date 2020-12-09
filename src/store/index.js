@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { setToken, getToken, removeToken } from "@/plugins/auth";
 import { logout, verify } from "@/api/account";
+import { getUserInfo } from "@/api/memberCenter";
 
 Vue.use(Vuex);
 
@@ -12,7 +13,7 @@ export default new Vuex.Store({
       token: "",
       name: "",
       balance: "",
-      vip: "",
+      vip: "vip0",
       uid: ""
     },
     registerFields: [],
@@ -20,7 +21,11 @@ export default new Vuex.Store({
     mcPageTitle: "",
     mcHeaderOption: false,
     mcOptionDialog: false,
-    mcEditPanel: false
+    mcEditPanel: false,
+    mcBackBtn: false,
+    bankList: [],
+    dialogVisible: false,
+    bankItem: null,
   },
   mutations: {
     SET_ACTIVE_PAGE(state, string) {
@@ -55,7 +60,24 @@ export default new Vuex.Store({
     },
     TOGGLE_EDIT_PANEL(state, boolean) {
       state.mcEditPanel = boolean;
-    }
+    },
+    TOGGLE_MC_BACK_BTN(state, boolean) {
+      state.mcBackBtn = boolean;
+    },
+    SET_USERINFO_STATE(state, payload) {
+      state.userInfo["vip"] = payload["gradeName"].toLowerCase();
+      state.userInfo["balance"] = payload["coin"];
+      state.userInfo["name"] = payload["userName"];
+    },
+    SET_BANK_LIST(state, payload) {
+      state.bankList = payload
+    },
+    TOGGLE_BANK_LIST(state, boolean) {
+      state.dialogVisible = boolean
+    },
+    SELECT_BANK_ITEM(state, payload) {
+      state.bankItem = payload
+    },
   },
   actions: {
     changeActivePage({ commit }, string) {
@@ -76,19 +98,30 @@ export default new Vuex.Store({
     },
     setMcPageTitle({ commit }, title) {
       commit("SET_MC_PAGE_TITLE", title);
+      commit("TOGGLE_MC_BACK_BTN", true);
+    },
+    setMcPageToMain({ commit }, title) {
+      commit("SET_MC_PAGE_TITLE", title);
+      commit("TOGGLE_MC_BACK_BTN", false);
     },
     checkLoginStatus({ commit }) {
-      const token = getToken();
+      const token = "Bearer " + getToken();
       verify({
         token: token
       }).then(res => {
         commit("SET_USERINFO_UID", res["userId"]);
+        getUserInfo({
+          id: res["userId"]
+        }).then(res => {
+          console.log(res);
+          commit("SET_USERINFO_STATE", res);
+        });
       });
 
       commit("SET_USERINFO_TOKEN", token);
     },
     doLogout({ commit }) {
-      const token = getToken();
+      const token = "Bearer " + getToken();
 
       logout({
         token: token,
@@ -103,6 +136,9 @@ export default new Vuex.Store({
         });
 
         removeToken();
+        setTimeout(function() {
+          location.reload();
+        }, 300);
       });
     },
     doToggleMcHeaderOption({ commit }, boolean) {
@@ -113,7 +149,16 @@ export default new Vuex.Store({
     },
     doToggleEditPanel({ commit }, boolean) {
       commit("TOGGLE_EDIT_PANEL", boolean);
-    }
+    },
+    setBankList({commit}, payload) {
+      commit("SET_BANK_LIST", payload);
+    },
+    toggleBankList({commit}, boolean) {
+      commit("TOGGLE_BANK_LIST", boolean);
+    },
+    selectBankItem({commit}, payload) {
+      commit("SELECT_BANK_ITEM", payload);
+    },
   },
   getters: {
     getRegisterFields(state) {
@@ -134,7 +179,7 @@ export default new Vuex.Store({
     getMcPageTitle(state) {
       return state.mcPageTitle;
     },
-    getUserInfo(state) {
+    getUserInfoState(state) {
       return state.userInfo;
     },
     getMcHeaderOption(state) {
@@ -145,6 +190,18 @@ export default new Vuex.Store({
     },
     getMcEditPanel(state) {
       return state.mcEditPanel;
-    }
+    },
+    getMcBackBtn(state) {
+      return state.mcBackBtn;
+    },
+    getBankList(state) {
+      return state.bankList
+    },
+    getDialogVisible(state) {
+      return state.dialogVisible
+    },
+    getBankItem(state) {
+      return state.bankItem
+    },
   }
 });

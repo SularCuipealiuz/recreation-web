@@ -1,10 +1,13 @@
 <template>
   <div class="sign-up-panel d-flex justify-start align-center flex-column">
     <v-col class="form pa-0 pb-8" cols="12">
-      <span class="go-back ml-4 mt-6 ml-sm-5 mt-sm-9" @click="doCloseDialog">
-        <img src="../assets/signIn/back.png" alt=""
-      /></span>
-      <div class="text-h5 white--text font-weight-bold my-6 my-sm-9">
+      <!--      <span class="go-back ml-4 mt-6 ml-sm-5 mt-sm-9" @click="doCloseDialog">-->
+      <!--        <img src="../assets/signIn/back.png" alt=""-->
+      <!--      /></span>-->
+      <div class="text-h6 white--text font-weight-bold my-6 my-sm-9 relative">
+        <v-icon class="go-back ml-4 ml-sm-5" @click="doCloseDialog">
+          fal fa-times
+        </v-icon>
         {{ $t("sign-up") }}
       </div>
       <div class="logo-panel my-4 my-sm-8">
@@ -472,8 +475,10 @@ export default {
   .go-back {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 16px;
+    bottom: 0;
+    left: 10px;
+    margin: auto;
+    color: white;
 
     > img {
       width: 100%;

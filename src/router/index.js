@@ -13,6 +13,9 @@ import Login from "@/views/Login";
 import Promo from "@/views/Promo";
 import PromoDetail from "@/views/PromoDetail";
 import MessageCenter from "@/views/MessageCenter";
+import BankCardManage from "@/views/BankCardManage";
+import AddBankCardPage from "@/views/AddBankCardPage";
+import TransactionRecord from "@/views/TransactionRecord";
 
 Vue.use(VueRouter);
 
@@ -63,6 +66,7 @@ const routes = [
       requireAuth: true
     },
     components: {
+      head: McHeader,
       body: MemberCenter,
       foot: Footer
     }
@@ -87,6 +91,39 @@ const routes = [
     components: {
       head: McHeader,
       body: MessageCenter
+    }
+  },
+  {
+    path: "/bank-card-manage",
+    name: "BankCardManage",
+    meta: {
+      requireAuth: true
+    },
+    components: {
+      head: McHeader,
+      body: BankCardManage
+    }
+  },
+  {
+    path: "/add-bankcard-page",
+    name: "AddBankCardPAge",
+    meta: {
+      requireAuth: true
+    },
+    components: {
+      head: McHeader,
+      body: AddBankCardPage
+    }
+  },
+  {
+    path: "/transaction-record",
+    name: "TransactionRecord",
+    meta: {
+      requireAuth: true
+    },
+    components: {
+      head: McHeader,
+      body: TransactionRecord
     }
   }
 ];

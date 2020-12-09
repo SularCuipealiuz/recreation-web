@@ -31,7 +31,7 @@
           <span class="user-name">{{ userInfo.name }}</span>
           <span class="vip-box ml-2">
             <img
-              :src="require('../assets/icons/vip/vip-' + userInfo.vip + '.png')"
+              :src="require('../assets/icons/vip/' + userInfo.vip + '.png')"
               alt=""
             />
           </span>
@@ -39,7 +39,7 @@
         <span class="balance">{{ userInfo.balance }}</span>
       </div>
       <v-row no-gutters class="d-flex flex-row justify-end align-center">
-        <div class="btn btn-icons">
+        <div class="btn btn-icons" @click="toTradingCenter">
           <span class="img-box"
             ><img src="../assets/icons/deposit.png" alt="" />
           </span>
@@ -90,7 +90,8 @@
 <script>
 import Carousel from "@/components/Carousel";
 import Bulletin from "@/components/Bulletin";
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
+import {getToken} from "@/plugins/auth";
 
 export default {
   name: "Home",
@@ -98,11 +99,6 @@ export default {
   data() {
     return {
       activePage: "sport",
-      userInfo: {
-        name: "USER NAME",
-        balance: "1234567890",
-        vip: 5
-      },
       typeList: [
         {
           id: 1,
@@ -126,14 +122,21 @@ export default {
       bodyHeight: 0
     };
   },
-  computed:{
+  computed: {
     ...mapGetters({
-      isLogin: "getIsLogin"
+      isLogin: "getIsLogin",
+      userInfo: "getUserInfoState"
     })
   },
   mounted() {
     this.bodyHeight = window.innerHeight - 330;
     this.$store.dispatch("changeActivePage", "home");
+  },
+  methods: {
+    toTradingCenter() {
+      console.log('111')
+      location.href = "http://192.168.0.122:8080/?token=" + getToken()
+    }
   }
 };
 </script>

@@ -52,6 +52,48 @@
       >
       </message-center-item>
     </div>
+    <div v-if="toggleExclusive === 2">
+      <v-form v-model="valid" class="px-4 message-box white mb-1">
+        <v-container>
+          <v-row no-gutters>
+            <v-col cols="12" md="4">
+              <div class="text-left caption">标题</div>
+              <v-text-field
+                outlined
+                dense
+                placeholder="填写问题的标题"
+                maxlength="20"
+                class="text-caption rounded-lg"
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" md="4">
+              <div class="text-left caption">内容</div>
+              <v-textarea
+                counter="200"
+                maxlength="200"
+                placeholder="填写问题的内容"
+                outlined
+                dense
+                class="text-caption rounded-lg"
+              ></v-textarea>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-form>
+      <div class="pa-2">
+        <v-btn depressed block height="44" class="btn-bg rounded-lg">
+          {{ $t("button.submit") }}
+        </v-btn>
+        <v-btn
+          depressed
+          block
+          height="44"
+          class="mt-3 btn-bg-outline rounded-lg"
+          >{{ $t("button.historyList") }}
+        </v-btn>
+      </div>
+    </div>
     <v-dialog
       v-model="mcDialog"
       content-class="bottom-panel"
@@ -200,13 +242,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.switch-button .btn-bg {
+.message-center .btn-bg {
   color: white;
   background: linear-gradient(
     to right,
     rgba(220, 202, 184, 1) 0%,
     rgba(210, 180, 150, 1) 100%
   ) !important;
+}
+
+.message-center .btn-bg-outline {
+  border: 1px solid #c09267;
+  color: #c09267;
 }
 
 .edit-panel {
@@ -234,15 +281,5 @@ export default {
   .select-all-read {
     height: 100%;
   }
-}
-</style>
-
-<style>
-.bottom-panel {
-  height: 180px !important;
-  top: auto !important;
-  bottom: 0 !important;
-  border-top-right-radius: 15px !important;
-  border-top-left-radius: 15px !important;
 }
 </style>

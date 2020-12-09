@@ -1,22 +1,28 @@
 <template>
-  <section class="password-manage">
+  <section class="custom-input-panel">
     <v-btn-toggle class="switch-button my-3 mx-3" v-model="toggleExclusive">
-      <v-btn class="switch-item white" :class="{ 'btn-bg': toggleExclusive === 0 }">
+      <v-btn
+        class="switch-item white"
+        :class="{ 'btn-bg': toggleExclusive === 0 }"
+      >
         {{ $t("passwordManage.signInPassword") }}
       </v-btn>
-      <v-btn class="switch-item white" :class="{ 'btn-bg': toggleExclusive === 1 }">
+      <v-btn
+        class="switch-item white"
+        :class="{ 'btn-bg': toggleExclusive === 1 }"
+      >
         {{ $t("passwordManage.withdrawalPassword") }}
       </v-btn>
     </v-btn-toggle>
 
     <v-col
       cols="12"
-      class="px-3 pb-2 pt-6 white"
+      class="pl-2 pr-4 pb-2 pt-6 white"
       v-show="toggleExclusive === 0"
     >
       <v-text-field
         v-model="form.oriPassword"
-        class="mt-2 input-panel"
+        class="mt-2 input-panel caption"
         :label="$t('passwordManage.oriPassword')"
         :placeholder="$t('tip.oriPassword')"
         prepend-icon="*"
@@ -27,7 +33,7 @@
       ></v-text-field>
       <v-text-field
         v-model="form.newPassword"
-        class="mt-2 input-panel"
+        class="mt-2 input-panel caption"
         :label="$t('passwordManage.newPassword')"
         :placeholder="$t('tip.password')"
         prepend-icon="*"
@@ -38,7 +44,7 @@
       ></v-text-field>
       <v-text-field
         v-model="form.confirmPassword"
-        class="mt-2 input-panel"
+        class="mt-2 input-panel caption"
         :label="$t('passwordManage.confirmPassword')"
         :placeholder="$t('tip.confirm')"
         prepend-icon="*"
@@ -51,12 +57,12 @@
 
     <v-col
       cols="12"
-      class="px-3 pb-2 pt-6 white"
+      class="pl-2 pr-4 pb-2 pt-6 white"
       v-show="toggleExclusive === 1"
     >
       <v-text-field
         v-model="form.newPassword"
-        class="mt-2 input-panel"
+        class="mt-2 input-panel caption"
         :label="$t('passwordManage.withdrawalNewPassword')"
         :placeholder="$t('tip.withdrawalNewPassword')"
         prepend-icon="*"
@@ -68,7 +74,7 @@
       ></v-text-field>
       <v-text-field
         v-model="form.confirmPassword"
-        class="mt-2 input-panel"
+        class="mt-2 input-panel caption"
         :label="$t('passwordManage.confirmPassword')"
         :placeholder="$t('tip.withdrawalConfirmPassword')"
         prepend-icon="*"
@@ -122,7 +128,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      userInfo: "getUserInfo"
+      userInfo: "getUserInfoState"
     }),
     validate() {
       if (this.toggleExclusive === 0) {
@@ -167,32 +173,5 @@ export default {
 
 .btn {
   height: 40px !important;
-}
-</style>
-
-<style lang="scss">
-.password-manage fieldset {
-  border-width: 0px !important;
-}
-
-.password-manage .v-input__prepend-outer {
-  margin-right: 0px !important;
-}
-
-.password-manage .v-input__prepend-outer {
-  margin-top: 9px !important;
-}
-
-.password-manage .btn-bg {
-  color: white;
-  background: linear-gradient(
-    to right,
-    rgba(220, 202, 184, 1) 0%,
-    rgba(210, 180, 150, 1) 100%
-  ) !important;
-}
-
-.password-manage .btn-bg span {
-  color: white;
 }
 </style>

@@ -42,7 +42,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "MessageCenterItem",
+  name: "MessageCenterHistoryItem",
   props: {
     obj: {
       type: Object,

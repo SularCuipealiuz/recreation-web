@@ -12,7 +12,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (getToken() !== undefined && getToken() !== null) {
-      config.headers["token"] = getToken();
+      config.headers["token"] = "Bearer " + getToken();
     }
 
     config.headers["Authorization"] =

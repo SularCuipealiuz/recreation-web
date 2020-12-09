@@ -15,7 +15,10 @@
     "edit": "",
     "read": "",
     "cancel": "",
-    "selectAll": ""
+    "confirm": "",
+    "selectAll": "",
+    "historyList": "",
+    "next": ""
   },
   "footer-tab": {
     "home": "Home",
@@ -69,7 +72,11 @@
     "massageCenter": "",
     "helpCenter": "",
     "wallet": "",
-    "logout": ""
+    "logout": "",
+    "bankCardManage": ""
+  },
+  "bankCardManage": {
+    "addNewBankCard": ""
   },
   "passwordManage": {
     "signInPassword": "",
@@ -87,5 +94,9 @@
     "notice": "",
     "announcement": "",
     "opinion": ""
+  },
+  "helpLink": {
+    "message": "",
+    "contact": ""
   }
 }
