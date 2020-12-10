@@ -2,7 +2,7 @@
   <section class="d-flex fill-height flex-column justify-center align-center">
     <div class="select-panel mt-2 px-3 d-flex white flex-column">
       <div class="fill-height d-flex py-3 relative">
-        <div class="select-box rounded" @click="switchDialog = 'option'">
+        <div class="select-box rounded" @click.self="switchDialog = 'option'">
           {{ optionItem.label }}
           <v-icon class="arrow">fas fa-caret-down</v-icon>
           <div
@@ -22,8 +22,11 @@
             </div>
           </div>
         </div>
-        <div class="select-box rounded ml-2" @click="switchDialog = 'date'">
-          选择日期
+        <div
+          class="select-box rounded ml-2"
+          @click.self="switchDialog = 'date'"
+        >
+          {{ dateOptionItem.label }}
           <v-icon class="arrow">fas fa-caret-down</v-icon>
           <div
             v-show="switchDialog === 'date'"
@@ -37,7 +40,7 @@
                 v-for="(e, i) in dateOptionList"
                 class="flex-auto item"
                 :class="{ active: dateItemType === e.type }"
-                @click="dateItemType = e.type"
+                @click="selectDateOptionItem(e)"
                 :key="i"
               >
                 {{ e.label }}
@@ -93,6 +96,9 @@ export default {
   computed: {
     optionItem() {
       return this.optionList.find(e => e.type === this.transactionType);
+    },
+    dateOptionItem() {
+      return this.dateOptionList.find(e => e.type === this.dateItemType);
     }
   },
   data() {
@@ -155,7 +161,12 @@ export default {
   },
   methods: {
     selectOptionItem(e) {
+      console.log("123");
       this.transactionType = e.type;
+      this.switchDialog = "";
+    },
+    selectDateOptionItem(e) {
+      this.dateItemType = e.type;
       this.switchDialog = "";
     }
   }
