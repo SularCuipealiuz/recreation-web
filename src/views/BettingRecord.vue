@@ -3,7 +3,7 @@
     <div class="select-panel mt-2 px-3 d-flex white flex-column">
       <div class="fill-height d-flex py-3 relative">
         <div class="select-box rounded" @click.self="switchDialog = 'option'">
-          {{ optionItem.label }}
+          {{ gameTypeItem.label }}
           <v-icon class="arrow" @click.self="switchDialog = 'option'">
             fas fa-caret-down
           </v-icon>
@@ -13,9 +13,9 @@
           >
             <div class="grid">
               <div
-                v-for="(e, i) in optionList"
+                v-for="(e, i) in gameTypeList"
                 class="flex-auto item"
-                :class="{ active: transactionType === e.type }"
+                :class="{ active: bettingType === e.typeId }"
                 @click="selectOptionItem(e)"
                 :key="i"
               >
@@ -69,30 +69,21 @@
             :key="e.orderNo"
           >
             <div
-              class="head d-flex justify-space-between align-center px-4 mb-1"
+              class="head d-flex justify-space-between align-center px-4"
             >
               <div class="highlight caption">
-                ·{{ optionItem.label }}·
-                <span
-                  class="white py-1 px-2 rounded-lg"
-                  :class="{
-                    'red--text': e.status === '失败',
-                    'light-blue--text':
-                      e.status === '申请中' || e.status === '处理中',
-                    'light-green--text': e.status === '已通过'
-                  }"
-                >
-                  {{ e.status }}
-                </span>
+                ·{{ gameTypeItem.label }}·
               </div>
               <div class="date">{{ e.time }}</div>
             </div>
             <div class="content d-flex flex-column text-left py-3 px-4">
-              <div class="subtitle-2 black--text">单号：{{ e.orderNo }}</div>
+              <div class="subtitle-1 black--text">{{ e.platformName }}</div>
+              <v-divider class="mb-1"></v-divider>
               <div class="d-flex align-center justify-space-between">
-                <span class="caption"> 交易方式：{{ e.transactionType }} </span>
-                <span class="caption"> 金额：{{ e.amount }} </span>
+                <span class="caption"> 投注金额：{{ e.betAmount }} </span>
+                <span class="blue--text caption"> 有效投注金额：{{ e.validBetAmount }} </span>
               </div>
+              <span class="caption"> 盈亏：{{ e.winLoss }} </span>
             </div>
           </div>
         </div>
@@ -106,7 +97,7 @@
               alt=""
             />
             <span>目前尚无任何</span>
-            <span>{{ $t("memberCenter.transactionHistory") }}</span>
+            <span>{{ $t("memberCenter.bettingHistory") }}</span>
           </div>
         </div>
         <img
@@ -122,21 +113,25 @@
 </template>
 
 <script>
-import { transactionRecord } from "@/api/report";
+import { bettingRecord } from "@/api/report";
+import {mapGetters} from "vuex";
 
 export default {
-  name: "TransactionRecord",
+  name: "BettingRecord",
   mounted() {
     this.$store.dispatch(
       "setMcPageTitle",
-      this.$t("memberCenter.transactionHistory")
+      this.$t("memberCenter.bettingHistory")
     );
 
     this.fetchList();
   },
   computed: {
-    optionItem() {
-      return this.optionList.find(e => e.type === this.transactionType);
+    ...mapGetters({
+      gameTypeList: "getGameTypeList"
+    }),
+    gameTypeItem() {
+      return this.gameTypeList.find(e => e.typeId === this.bettingType);
     },
     dateOptionItem() {
       return this.dateOptionList.find(e => e.type === this.dateItemType);
@@ -149,7 +144,7 @@ export default {
       type: 0,
       dateStart: "",
       dateEnd: "",
-      transactionType: 1,
+      bettingType: "1",
       dateItemType: 1,
       optionList: [
         {
@@ -255,20 +250,21 @@ export default {
         ? (startDate = this.formatDate(now.setDate(now.getDate() - test)))
         : "";
 
-      transactionRecord({
+      bettingRecord({
         current: 1,
         model: {
           endDate: endDate,
-          startDate: startDate,
-          transactionType: this.transactionType
+          startDate: "2020-10-10",
+          gameTypeId: Number(this.bettingType)
         },
         size: 10
       }).then(res => {
         this.recordList = res.records;
       });
+      console.log(startDate)
     },
     selectOptionItem(e) {
-      this.transactionType = e.type;
+      this.bettingType = e.typeId;
       this.switchDialog = "";
       this.fetchList();
     },

@@ -16,6 +16,8 @@ import MessageCenter from "@/views/MessageCenter";
 import BankCardManage from "@/views/BankCardManage";
 import AddBankCardPage from "@/views/AddBankCardPage";
 import TransactionRecord from "@/views/TransactionRecord";
+import BettingRecord from "@/views/BettingRecord";
+import DiscountRecord from "@/views/DiscountRecord";
 
 Vue.use(VueRouter);
 
@@ -124,6 +126,28 @@ const routes = [
     components: {
       head: McHeader,
       body: TransactionRecord
+    }
+  },
+  {
+    path: "/betting-record",
+    name: "BettingRecord",
+    meta: {
+      requireAuth: true
+    },
+    components: {
+      head: McHeader,
+      body: BettingRecord
+    }
+  },
+  {
+    path: "/discount-record",
+    name: "DiscountRecord",
+    meta: {
+      requireAuth: true
+    },
+    components: {
+      head: McHeader,
+      body: DiscountRecord
     }
   }
 ];

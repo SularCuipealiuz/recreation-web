@@ -30,3 +30,11 @@ export function carousel(data) {
     data
   });
 }
+
+export function findGameTypeList(data) {
+  return request({
+    url: "/memberWeb/init/findGameTypeList",
+    method: "post",
+    data
+  });
+}

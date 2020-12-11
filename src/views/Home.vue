@@ -91,7 +91,8 @@
 import Carousel from "@/components/Carousel";
 import Bulletin from "@/components/Bulletin";
 import { mapGetters } from "vuex";
-import {getToken} from "@/plugins/auth";
+import { getToken } from "@/plugins/auth";
+import { findGameTypeList } from "@/api/homePage";
 
 export default {
   name: "Home",
@@ -131,11 +132,14 @@ export default {
   mounted() {
     this.bodyHeight = window.innerHeight - 330;
     this.$store.dispatch("changeActivePage", "home");
+    findGameTypeList().then(res => {
+      this.$store.dispatch("setGameTypeList", res);
+    });
   },
   methods: {
     toTradingCenter() {
-      console.log('111')
-      location.href = "http://192.168.0.122:8080/?token=" + getToken()
+      console.log("111");
+      location.href = "http://192.168.0.122:8080/?token=" + getToken();
     }
   }
 };

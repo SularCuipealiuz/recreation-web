@@ -80,7 +80,11 @@
       <v-divider class="mb-3"></v-divider>
 
       <v-row class="white">
-        <member-center-item :label="$t('memberCenter.bettingHistory')">
+        <member-center-item
+          :label="$t('memberCenter.bettingHistory')"
+          :method="goPage"
+          :target="'BettingRecord'"
+        >
           <template slot="icon">
             <img
               class="mr-2"
@@ -108,7 +112,11 @@
       </v-row>
       <v-divider></v-divider>
       <v-row class="white">
-        <member-center-item :label="$t('memberCenter.promoHistory')">
+        <member-center-item
+          :label="$t('memberCenter.discountHistory')"
+          :method="goPage"
+          :target="'DiscountRecord'"
+        >
           <template slot="icon">
             <img class="mr-2" src="../assets/svg/icon-s-coupon.svg" alt="" />
           </template>

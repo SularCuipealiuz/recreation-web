@@ -3,7 +3,7 @@
     <div class="select-panel mt-2 px-3 d-flex white flex-column">
       <div class="fill-height d-flex py-3 relative">
         <div class="select-box rounded" @click.self="switchDialog = 'option'">
-          {{ optionItem.label }}
+          {{ gameTypeItem.label }}
           <v-icon class="arrow" @click.self="switchDialog = 'option'">
             fas fa-caret-down
           </v-icon>
@@ -13,9 +13,9 @@
           >
             <div class="grid">
               <div
-                v-for="(e, i) in optionList"
+                v-for="(e, i) in gameTypeList"
                 class="flex-auto item"
-                :class="{ active: transactionType === e.type }"
+                :class="{ active: discountType === e.typeId }"
                 @click="selectOptionItem(e)"
                 :key="i"
               >
@@ -68,31 +68,20 @@
             v-for="e in recordList"
             :key="e.orderNo"
           >
-            <div
-              class="head d-flex justify-space-between align-center px-4 mb-1"
-            >
-              <div class="highlight caption">
-                ·{{ optionItem.label }}·
-                <span
-                  class="white py-1 px-2 rounded-lg"
-                  :class="{
-                    'red--text': e.status === '失败',
-                    'light-blue--text':
-                      e.status === '申请中' || e.status === '处理中',
-                    'light-green--text': e.status === '已通过'
-                  }"
-                >
-                  {{ e.status }}
-                </span>
-              </div>
+            <div class="head d-flex justify-space-between align-center px-4">
+              <div class="highlight caption">·{{ gameTypeItem.label }}·</div>
               <div class="date">{{ e.time }}</div>
             </div>
             <div class="content d-flex flex-column text-left py-3 px-4">
-              <div class="subtitle-2 black--text">单号：{{ e.orderNo }}</div>
+              <div class="subtitle-1 black--text">{{ e.activityName }}</div>
+              <v-divider class="mb-1"></v-divider>
               <div class="d-flex align-center justify-space-between">
-                <span class="caption"> 交易方式：{{ e.transactionType }} </span>
-                <span class="caption"> 金额：{{ e.amount }} </span>
+                <span class="caption"> 活动标题：{{ e.activityTitle }} </span>
+                <span class="caption" style="color: #c09267"
+                  >{{ e.approveStatus }}
+                </span>
               </div>
+              <span class="caption"> 优惠：{{ e.promoteAmount }}元 </span>
             </div>
           </div>
         </div>
@@ -106,7 +95,7 @@
               alt=""
             />
             <span>目前尚无任何</span>
-            <span>{{ $t("memberCenter.transactionHistory") }}</span>
+            <span>{{ $t("memberCenter.discountHistory") }}</span>
           </div>
         </div>
         <img
@@ -122,21 +111,25 @@
 </template>
 
 <script>
-import { transactionRecord } from "@/api/report";
+import { discountRecord } from "@/api/report";
+import { mapGetters } from "vuex";
 
 export default {
-  name: "TransactionRecord",
+  name: "DiscountRecord",
   mounted() {
     this.$store.dispatch(
       "setMcPageTitle",
-      this.$t("memberCenter.transactionHistory")
+      this.$t("memberCenter.discountHistory")
     );
 
     this.fetchList();
   },
   computed: {
-    optionItem() {
-      return this.optionList.find(e => e.type === this.transactionType);
+    ...mapGetters({
+      gameTypeList: "getGameTypeList"
+    }),
+    gameTypeItem() {
+      return this.gameTypeList.find(e => e.typeId === this.discountType);
     },
     dateOptionItem() {
       return this.dateOptionList.find(e => e.type === this.dateItemType);
@@ -149,7 +142,7 @@ export default {
       type: 0,
       dateStart: "",
       dateEnd: "",
-      transactionType: 1,
+      discountType: "1",
       dateItemType: 1,
       optionList: [
         {
@@ -255,20 +248,21 @@ export default {
         ? (startDate = this.formatDate(now.setDate(now.getDate() - test)))
         : "";
 
-      transactionRecord({
+      discountRecord({
         current: 1,
         model: {
           endDate: endDate,
-          startDate: startDate,
-          transactionType: this.transactionType
+          startDate: "2020-10-10",
+          gameTypeId: Number(this.discountType)
         },
         size: 10
       }).then(res => {
         this.recordList = res.records;
       });
+      console.log(startDate);
     },
     selectOptionItem(e) {
-      this.transactionType = e.type;
+      this.discountType = e.typeId;
       this.switchDialog = "";
       this.fetchList();
     },

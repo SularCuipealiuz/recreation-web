@@ -26,6 +26,7 @@ export default new Vuex.Store({
     bankList: [],
     dialogVisible: false,
     bankItem: null,
+    gameTypeList: []
   },
   mutations: {
     SET_ACTIVE_PAGE(state, string) {
@@ -70,14 +71,17 @@ export default new Vuex.Store({
       state.userInfo["name"] = payload["userName"];
     },
     SET_BANK_LIST(state, payload) {
-      state.bankList = payload
+      state.bankList = payload;
     },
     TOGGLE_BANK_LIST(state, boolean) {
-      state.dialogVisible = boolean
+      state.dialogVisible = boolean;
     },
     SELECT_BANK_ITEM(state, payload) {
-      state.bankItem = payload
+      state.bankItem = payload;
     },
+    SET_GAME_TYPE_LIST(state, payload) {
+      state.gameTypeList = payload;
+    }
   },
   actions: {
     changeActivePage({ commit }, string) {
@@ -150,15 +154,18 @@ export default new Vuex.Store({
     doToggleEditPanel({ commit }, boolean) {
       commit("TOGGLE_EDIT_PANEL", boolean);
     },
-    setBankList({commit}, payload) {
+    setBankList({ commit }, payload) {
       commit("SET_BANK_LIST", payload);
     },
-    toggleBankList({commit}, boolean) {
+    toggleBankList({ commit }, boolean) {
       commit("TOGGLE_BANK_LIST", boolean);
     },
-    selectBankItem({commit}, payload) {
+    selectBankItem({ commit }, payload) {
       commit("SELECT_BANK_ITEM", payload);
     },
+    setGameTypeList({ commit }, payload) {
+      commit("SET_GAME_TYPE_LIST", payload);
+    }
   },
   getters: {
     getRegisterFields(state) {
@@ -195,13 +202,17 @@ export default new Vuex.Store({
       return state.mcBackBtn;
     },
     getBankList(state) {
-      return state.bankList
+      return state.bankList;
     },
+
     getDialogVisible(state) {
-      return state.dialogVisible
+      return state.dialogVisible;
     },
     getBankItem(state) {
-      return state.bankItem
+      return state.bankItem;
     },
+    getGameTypeList(state) {
+      return state.gameTypeList;
+    }
   }
 });
