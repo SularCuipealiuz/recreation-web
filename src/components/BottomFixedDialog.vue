@@ -6,7 +6,7 @@
     hide-overlay
     transition="dialog-bottom-transition"
     scrollable
-    @click:outside="$store.dispatch('toggleBankList', false)"
+    @click:outside="$store.dispatch('toggleBottomDialogList', false)"
   >
     <slot name="content"></slot>
   </v-dialog>

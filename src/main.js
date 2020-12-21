@@ -3,11 +3,14 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import { sync } from 'vuex-router-sync'
 import vuetify from "@/plugins/vuetify";
 import VueI18n from "vue-i18n";
 import { languages, defaultLocale } from "@/lang/index";
 import VueHolder from "vue-holderjs";
 import animated from "animate.css";
+
+sync(store, router, {moduleName: 'RouteModule'})
 
 Vue.use(animated);
 Vue.use(VueI18n);

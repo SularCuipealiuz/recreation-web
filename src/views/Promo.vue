@@ -5,13 +5,14 @@
       <v-tab v-for="e in tabList" :key="e" :ripple="false">{{ e }}</v-tab>
     </v-tabs>
     <v-tabs-items class="fill-height px-3 promo-list-panel pt-2" v-model="tab">
-      <v-tab-item v-for="i in 3" :key="i">
+      <v-tab-item v-for="i in tabList.length" :key="i">
         <promo-item
-          :img-type="e.type"
-          :date="e.date"
+          :img-type="e.cornerIcon"
+          :dateSt="e.activitySt"
+          :dateEd="e.activityEd"
           :title="e.title"
           :id="e.id"
-          :img="e.img"
+          :img="e.bannerUrl"
           v-for="e in promoList"
           :key="e.id"
         ></promo-item>
@@ -22,51 +23,25 @@
 
 <script>
 import PromoItem from "@/components/PromoItem";
-import {activity} from "@/api/activityCenter";
+import { activity } from "@/api/activityCenter";
 
 export default {
   name: "Promo",
   components: { PromoItem },
   mounted() {
     this.$store.dispatch("setMcPageTitle", this.$t("promo.promoCenter"));
-    activity().then(res =>{
-      console.log(res)
-    })
+    activity({
+      type: "H5",
+      gameType: ""
+    }).then(res => {
+      this.promoList = res;
+    });
   },
   data() {
     return {
       tab: "",
       tabList: ["全部优惠", "彩票", "电子", "体育", "真人", "测试"],
-      promoList: [
-        {
-          id: "1",
-          title: "標題001",
-          time: "2020年10月25日~xxx",
-          type: "hot",
-          img: "xxx"
-        },
-        {
-          id: "2",
-          title: "標題002",
-          time: "2020年10月25日~xxx",
-          type: "fire",
-          img: "xxx"
-        },
-        {
-          id: "3",
-          title: "標題003",
-          time: "2020年10月25日~xxx",
-          type: "recommend",
-          img: "xxx"
-        },
-        {
-          id: "4",
-          title: "標題004",
-          time: "2020年10月25日~xxx",
-          type: "recommend",
-          img: "xxx"
-        }
-      ]
+      promoList: []
     };
   }
 };

@@ -32,7 +32,8 @@
             </span>
             <span>{{ $t("button.deposit") }}</span>
           </div>
-          <div class="btn btn-icons">
+          <div class="btn btn-icons"
+               @click="goPage('WithdrawalPage')">
             <span class="img-box">
               <img src="../assets/icons/card.png" alt="" />
             </span>
@@ -125,7 +126,11 @@
       <v-divider class="mb-3"></v-divider>
 
       <v-row class="white">
-        <member-center-item :label="$t('memberCenter.bonus')">
+        <member-center-item
+          :label="$t('memberCenter.bonus')"
+          :method="goPage"
+          :target="'RebateRecord'"
+        >
           <template slot="icon">
             <img class="mr-2" src="../assets/svg/icon-s-rebate.svg" alt="" />
           </template>

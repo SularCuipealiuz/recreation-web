@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="31" height="33" viewBox="0 0 31 33">
+    <defs>
+        <linearGradient id="1vanbn1aja" x1="21.779%" x2="81.018%" y1="50%" y2="50%">
+            <stop offset="0%" stop-color="#ED9AA7"/>
+            <stop offset="100%" stop-color="#DC6979"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g>
+                        <path fill="url(#1vanbn1aja)" d="M15.805 11.44L26.865 11.25 40.044 24.429 2.813 24.432z" transform="translate(-61 -177) translate(11 167) translate(49 .982) translate(.208 .563) rotate(45 21.428 17.84)"/>
+                        <text fill="#FFF" font-family="PingFangSC-Medium, PingFang SC" font-size="9" font-weight="400" transform="translate(-61 -177) translate(11 167) translate(49 .982) translate(.208 .563) rotate(45 22.118 19.386)">
+                            <tspan x="12.118" y="22.886">HOT</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

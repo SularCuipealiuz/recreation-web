@@ -23,3 +23,11 @@ export function discountRecord(data) {
     data
   });
 }
+
+export function rebateRecord(data) {
+  return request({
+    url: "/memberWeb/rebateRecord/query",
+    method: "post",
+    data
+  });
+}

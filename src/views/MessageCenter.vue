@@ -89,7 +89,7 @@
           depressed
           block
           height="44"
-          class="mt-3 btn-bg-outline rounded-lg"
+          class="btn-bg-outline rounded-lg"
           >{{ $t("button.historyList") }}
         </v-btn>
       </div>

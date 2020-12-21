@@ -42,7 +42,24 @@ export function changeWithdrawPassword(data) {
 
 export function bankList() {
   return request({
-    url: "/tenantManage/dic/withdraw/initBank",
+    url: "/memberWeb/withdraw/initBank",
     method: "post"
   });
 }
+
+export function branchList(data) {
+  return request({
+    url: "/memberWeb/withdraw/bank/branch",
+    method: "post",
+    data
+  });
+}
+
+export function addMemberBank(data) {
+  return request({
+    url: "/memberWeb/withdraw/addMemberBank",
+    method: "post",
+    data
+  });
+}
+

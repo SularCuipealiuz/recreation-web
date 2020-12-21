@@ -38,3 +38,11 @@ export function findGameTypeList(data) {
     data
   });
 }
+
+export function playGame(data) {
+  return request({
+    url: "/memberWeb/transferGame/playGame",
+    method: "post",
+    data
+  });
+}

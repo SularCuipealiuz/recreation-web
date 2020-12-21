@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="347" height="130" viewBox="0 0 347 130">
+    <defs>
+        <linearGradient id="v236dpspva" x1="50%" x2="50%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#DEC9B4"/>
+            <stop offset="100%" stop-color="#D2B598"/>
+        </linearGradient>
+        <linearGradient id="gqfn6dcosd" x1="92.091%" x2="11.924%" y1="18%" y2="63.946%">
+            <stop offset="0%" stop-color="#FFF"/>
+            <stop offset="100%" stop-color="#FFF" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="3xm11sms0c" x1="41.131%" x2="100%" y1="43.961%" y2="18%">
+            <stop offset="0%" stop-color="#FFF" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#FFF" stop-opacity=".5"/>
+        </linearGradient>
+        <linearGradient id="3a0fxifaef" x1="41.131%" x2="100%" y1="43.961%" y2="18%">
+            <stop offset="0%" stop-color="#FFF" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#FFF"/>
+        </linearGradient>
+        <linearGradient id="fcq56nauzg" x1="92.091%" x2="11.924%" y1="18.129%" y2="63.89%">
+            <stop offset="0%" stop-color="#FFF"/>
+            <stop offset="100%" stop-color="#FFF" stop-opacity="0"/>
+        </linearGradient>
+        <rect id="ipkehz8ppb" width="347" height="130" x="0" y="0" rx="10"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g transform="translate(-15 -130) translate(15 130)">
+                <rect width="346" height="129" x=".5" y=".5" fill="url(#v236dpspva)" stroke="#FFA90B" rx="10"/>
+                <mask id="9nhdk2yo3e" fill="#fff">
+                    <use xlink:href="#ipkehz8ppb"/>
+                </mask>
+                <rect width="346" height="129" x=".5" y=".5" stroke="#FFA90B" rx="10"/>
+                <path fill="url(#gqfn6dcosd)" fill-opacity=".2" stroke="url(#3xm11sms0c)" d="M366.965-28.5l-91.207 115h-51.723l91.207-115h51.723z" mask="url(#9nhdk2yo3e)"/>
+                <path fill="url(#gqfn6dcosd)" fill-opacity=".2" stroke="url(#3a0fxifaef)" d="M366.965 72.5l-91.207 115h-51.723l91.207-115h51.723z" mask="url(#9nhdk2yo3e)" transform="rotate(-180 295.5 130)"/>
+                <path fill="url(#fcq56nauzg)" fill-opacity=".1" d="M233.352 -12L324 -12 166.648 186 76 186z" mask="url(#9nhdk2yo3e)"/>
+            </g>
+        </g>
+    </g>
+</svg>

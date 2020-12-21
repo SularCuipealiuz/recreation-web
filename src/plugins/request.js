@@ -47,6 +47,12 @@ service.interceptors.response.use(
         });
       }
 
+      if (res.code === 40005) {
+        store.dispatch("doLoginAgain").then(res => {
+          console.log("res", res);
+        });
+      }
+
       return Promise.reject(new Error(res.message || "Error"));
     } else {
       return res.data;

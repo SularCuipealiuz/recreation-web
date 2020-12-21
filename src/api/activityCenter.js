@@ -2,7 +2,7 @@ import request from "@/plugins/request";
 
 export function activity(data) {
   return request({
-    url: "/memberWeb/activityCenter/activity",
+    url: "/memberWeb/init/activity",
     method: "post",
     data
   });

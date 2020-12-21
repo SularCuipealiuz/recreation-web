@@ -18,6 +18,8 @@ import AddBankCardPage from "@/views/AddBankCardPage";
 import TransactionRecord from "@/views/TransactionRecord";
 import BettingRecord from "@/views/BettingRecord";
 import DiscountRecord from "@/views/DiscountRecord";
+import RebateRecord from "@/views/RebateRecord";
+import WithdrawalPage from "@/views/WithdrawalPage";
 
 Vue.use(VueRouter);
 
@@ -148,6 +150,28 @@ const routes = [
     components: {
       head: McHeader,
       body: DiscountRecord
+    }
+  },
+  {
+    path: "/rebate-record",
+    name: "RebateRecord",
+    meta: {
+      requireAuth: true
+    },
+    components: {
+      head: McHeader,
+      body: RebateRecord
+    }
+  },
+  {
+    path: "/withdrawal-page",
+    name: "WithdrawalPage",
+    meta: {
+      requireAuth: true
+    },
+    components: {
+      head: McHeader,
+      body: WithdrawalPage
     }
   }
 ];

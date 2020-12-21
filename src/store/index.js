@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    userInfoObj: null,
     activePage: "home",
     userInfo: {
       token: "",
@@ -81,9 +82,15 @@ export default new Vuex.Store({
     },
     SET_GAME_TYPE_LIST(state, payload) {
       state.gameTypeList = payload;
+    },
+    SET_USERINFO(state, payload) {
+      state.userInfoObj = payload;
     }
   },
   actions: {
+    setUserInfo({ commit }, payload) {
+      commit("SET_USERINFO", payload);
+    },
     changeActivePage({ commit }, string) {
       commit("SET_ACTIVE_PAGE", string);
     },
@@ -145,6 +152,12 @@ export default new Vuex.Store({
         }, 300);
       });
     },
+    doLoginAgain({ state }) {
+      state.RouteModule.push({
+        path: "/sign-in",
+        query: { redirect: "/", goBack: "/" }
+      });
+    },
     doToggleMcHeaderOption({ commit }, boolean) {
       commit("SET_MC_HEADER_OPTION", boolean);
     },
@@ -157,7 +170,7 @@ export default new Vuex.Store({
     setBankList({ commit }, payload) {
       commit("SET_BANK_LIST", payload);
     },
-    toggleBankList({ commit }, boolean) {
+    toggleBottomDialogList({ commit }, boolean) {
       commit("TOGGLE_BANK_LIST", boolean);
     },
     selectBankItem({ commit }, payload) {
@@ -204,7 +217,6 @@ export default new Vuex.Store({
     getBankList(state) {
       return state.bankList;
     },
-
     getDialogVisible(state) {
       return state.dialogVisible;
     },
@@ -213,6 +225,9 @@ export default new Vuex.Store({
     },
     getGameTypeList(state) {
       return state.gameTypeList;
+    },
+    getUserInfoObj(state) {
+      return state.userInfoObj;
     }
   }
 });

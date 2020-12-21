@@ -1,89 +1,121 @@
 <template>
-  <section class="custom-input-panel">
-    <div class="white mt-3 pt-2">
-      <v-text-field
-        class="mt-2 mb-1 input-panel caption sm-icon"
-        label="选择银行"
-        placeholder="请选择"
-        prepend-icon="*"
-        append-outer-icon="far fa-chevron-right"
-        readonly
-        hide-details
-        v-model="bankItem"
-        @click="$store.dispatch('toggleBankList', true)"
-      ></v-text-field>
-      <v-divider class="mx-3"></v-divider>
-      <v-text-field
-        class="mt-4 mb-1 input-panel caption"
-        label="真实姓名"
-        placeholder="请确保姓名与开户行姓名一致，否则将无法提款"
-        prepend-icon="*"
-        hide-details
-        v-model="bankForm.account"
-      ></v-text-field>
-      <v-divider class="mx-3"></v-divider>
-      <v-text-field
-        class="mt-4 mb-1 input-panel caption"
-        label="卡号"
-        placeholder="请输入银行卡卡号"
-        prepend-icon="*"
-        hide-details
-        v-model="bankForm.accountName"
-      ></v-text-field>
-      <v-divider class="mx-3"></v-divider>
-      <v-text-field
-        class="mt-4 mb-1 input-panel caption sm-icon"
-        label="开户支行"
-        placeholder="请选择"
-        prepend-icon="*"
-        append-outer-icon="far fa-chevron-right"
-        readonly
-        hide-details
-        v-model="bankItem"
-        @click="$store.dispatch('toggleBankList', true)"
-      ></v-text-field>
-      <v-divider class="mx-3"></v-divider>
-      <v-text-field
-        class="mt-4 mb-1 input-panel caption"
-        label="取款密码"
-        placeholder=" "
-        prepend-icon="*"
-        :append-outer-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-        :type="show1 ? 'text' : 'password'"
-        hide-details
-        @click:append-outer="show1 = !show1"
-      ></v-text-field>
-      <v-divider class="mx-3"></v-divider>
+  <section class="custom-input-panel fill-height">
+    <div v-if="page === 1" class="fill-height">
+      <div class="white pt-2">
+        <v-text-field
+          class="mt-2 mb-1 input-panel caption sm-icon"
+          label="选择银行"
+          placeholder="请选择"
+          prepend-icon="*"
+          append-outer-icon="far fa-chevron-right"
+          readonly
+          hide-details
+          v-model="bankItem"
+          @click="openBankDialog"
+        ></v-text-field>
+        <v-divider class="mx-3"></v-divider>
+        <v-text-field
+          class="mt-4 mb-1 input-panel caption"
+          label="真实姓名"
+          placeholder="请确保姓名与开户行姓名一致，否则将无法提款"
+          prepend-icon="*"
+          hide-details
+          v-model="bankForm.account"
+        ></v-text-field>
+        <v-divider class="mx-3"></v-divider>
+        <v-text-field
+          class="mt-4 mb-1 input-panel caption"
+          label="卡号"
+          placeholder="请输入银行卡卡号"
+          prepend-icon="*"
+          hide-details
+          v-model="bankForm.accountName"
+        ></v-text-field>
+        <v-divider class="mx-3"></v-divider>
+        <v-text-field
+          class="mt-4 mb-1 input-panel caption sm-icon"
+          label="开户支行"
+          placeholder="请选择"
+          prepend-icon="*"
+          append-outer-icon="far fa-chevron-right"
+          readonly
+          hide-details
+          v-model="branchItem"
+          @click="openBranchDialog"
+        ></v-text-field>
+        <v-divider class="mx-3"></v-divider>
+        <v-text-field
+          class="mt-4 mb-1 input-panel caption"
+          label="取款密码"
+          placeholder=" "
+          prepend-icon="*"
+          :append-outer-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="show1 ? 'text' : 'password'"
+          hide-details
+          v-model="bankForm.withdrawPassword"
+          @click:append-outer="show1 = !show1"
+        ></v-text-field>
+        <v-divider class="mx-3"></v-divider>
+      </div>
+      <v-col cols="12">
+        <v-btn
+          block
+          depressed
+          class="btn btn-bg rounded-lg text--white"
+          @click="nextPage"
+        >
+          {{ $t("button.next") }}
+        </v-btn>
+      </v-col>
     </div>
-
-    <v-col cols="12" class="mt-3">
-      <v-btn
-        block
-        depressed
-        class="btn btn-bg rounded-lg text--white"
-        :disabled="validate"
-        @click="submit(toggleExclusive)"
-      >
-        {{ $t("button.submit") }}
-      </v-btn>
-    </v-col>
+    <div v-if="page === 2" class="fill-height">
+      <bank-card :obj="bankFormObj"></bank-card>
+      <div class="white subtitle-1 hint-color py-2 mt-3">
+        请确认银行卡资料是否正确,点击确认提交送出
+      </div>
+      <v-col cols="12">
+        <v-btn
+          block
+          depressed
+          class="btn btn-bg rounded-lg text--white"
+          @click="submit"
+        >
+          {{ $t("button.submit") }}
+        </v-btn>
+      </v-col>
+    </div>
     <bottom-fixed-dialog>
       <template v-slot:content>
         <v-card color="#f4f4f4" tile>
           <v-toolbar class="header-panel">
-            <v-btn icon dark @click="$store.dispatch('toggleBankList', false)">
+            <v-btn
+              icon
+              dark
+              @click="$store.dispatch('toggleBottomDialogList', false)"
+            >
               取消
             </v-btn>
             <v-toolbar-title class="subtitle-1">选择所属银行</v-toolbar-title>
           </v-toolbar>
           <v-card-text class="pa-0 pt-4">
-            <div v-for="(e, index) in bankList" :key="index">
+            <div v-for="(e, index) in dialogList" :key="index">
               <v-btn
+                v-if="dialogType === 'bank'"
                 class="justify-start align-center py-6 white bank-btn"
                 block
                 tile
                 elevation="0"
                 @click="selectBankItem(e)"
+              >
+                {{ e.desc }}
+              </v-btn>
+              <v-btn
+                v-if="dialogType === 'branch'"
+                class="justify-start align-center py-6 white bank-btn"
+                block
+                tile
+                elevation="0"
+                @click="selectBranchItem(e)"
               >
                 {{ e.desc }}
               </v-btn>
@@ -96,20 +128,21 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import BottomFixedDialog from "@/components/BottomFixedDialog";
-import { bankList } from "@/api/memberCenter";
+import { addMemberBank, bankList, branchList } from "@/api/memberCenter";
+import BankCard from "@/components/BankCard";
 
 export default {
   name: "AddBankCardPage",
-  components: { BottomFixedDialog },
-  computed: {
-    ...mapGetters({
-      bankItem: "getBankItem"
-    })
-  },
+  components: { BankCard, BottomFixedDialog },
   data() {
     return {
+      bankFormObj: {},
+      page: 1,
+      dialogType: "",
+      bankItem: null,
+      bankObj: null,
+      branchItem: null,
       show1: false,
       list: this.$route.params.channelInfo,
       channelItem: this.$route.params,
@@ -120,9 +153,12 @@ export default {
         account: "",
         accountName: "",
         memberNote: "",
-        amount: 0
+        amount: 0,
+        withdrawPassword: ""
       },
-      bankList: []
+      bankList: [],
+      branchList: [],
+      dialogList: []
     };
   },
   mounted() {
@@ -137,9 +173,63 @@ export default {
     });
   },
   methods: {
+    nextPage() {
+      this.bankFormObj = {
+        desc: this.bankObj.desc,
+        account: this.bankForm.account,
+        branchItem: this.branchItem,
+        accountName: this.bankForm.accountName
+      };
+      this.page = 2;
+    },
+    submit() {
+      addMemberBank({
+        account: this.bankForm.accountName,
+        bankBranch: this.branchItem,
+        bankCode: this.bankObj.code,
+        realName: this.bankForm.account,
+        withdrawPassword: this.bankForm.withdrawPassword
+      }).then(res => {
+        if (res.code === 0) {
+          this.$router.push({
+            path: "/bank-card-manage"
+          });
+        }
+      });
+    },
+    openBankDialog() {
+      this.$store.dispatch("toggleBottomDialogList", true);
+      this.dialogType = "bank";
+      this.dialogList = this.bankList;
+    },
+    openBranchDialog() {
+      const _this = this;
+      if (_this.branchList.length === 0) {
+        branchList({
+          bankId: Number(_this.bankObj.code),
+          branchName: _this.bankObj.desc
+        }).then(res => {
+          _this.branchList = res;
+          _this.$store.dispatch("toggleBottomDialogList", true);
+          _this.dialogType = "branch";
+          _this.dialogList = this.branchList;
+        });
+      } else {
+        _this.$store.dispatch("toggleBottomDialogList", true);
+        _this.dialogType = "branch";
+        _this.dialogList = this.branchList;
+      }
+    },
     selectBankItem(element) {
-      this.$store.dispatch("selectBankItem", element.desc);
-      this.$store.dispatch("toggleBankList", false);
+      this.bankObj = element;
+      this.bankItem = element.desc;
+      this.$store.dispatch("toggleBottomDialogList", false);
+      this.dialogType = "";
+    },
+    selectBranchItem(element) {
+      this.branchItem = element.desc;
+      this.$store.dispatch("toggleBottomDialogList", false);
+      this.dialogType = "";
     }
   }
 };
@@ -158,6 +248,10 @@ export default {
 .bank-btn {
   border-bottom: 1px solid #eeeeee !important;
   background-color: white !important;
+}
+
+.hint-color {
+  color: #97a4c5;
 }
 </style>
 

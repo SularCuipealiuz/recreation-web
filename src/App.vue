@@ -6,7 +6,7 @@
     <transition name="fade">
       <router-view name="head" />
     </transition>
-    <v-main class="flex body-panel">
+    <v-main class="flex body-panel pt-3">
       <transition name="fade">
         <router-view class="flex" name="body" />
       </transition>
@@ -54,7 +54,7 @@ export default {
   methods: {
     selectBankItem(element) {
       this.$store.dispatch("selectBankItem", element.desc);
-      this.$store.dispatch("toggleBankList", false);
+      this.$store.dispatch("toggleBottomDialogList", false);
     }
   }
 };

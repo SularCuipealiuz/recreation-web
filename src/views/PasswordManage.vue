@@ -86,7 +86,7 @@
       ></v-text-field>
     </v-col>
 
-    <v-col cols="12" class="mt-3">
+    <v-col cols="12">
       <v-btn
         block
         depressed
